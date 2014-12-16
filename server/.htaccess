@@ -1,0 +1,10 @@
+RewriteEngine On
+
+# Resolve .php file for extensionless php urls
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteRule ^([^/.]+)$ $1.php [L]
+
+# Allow large file uploads
+php_value memory_limit 4294967296
+php_value post_max_size 1073741824
+php_value upload_max_filesize 524288000

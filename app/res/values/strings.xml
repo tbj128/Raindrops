@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="app_name">Raindrops</string>
+    <string name="epic">rain</string>
+    <string name="wheels">drops</string>
+    
+    <!-- Content Description Text -->
+    <string name="home_button">Home Button</string>
+    <string name="mail_button">Mail</string>
+    <string name="awards_button">Awards</string>
+    <string name="goals_button">Goals</string>
+    
+    <!-- Placeholder Text -->
+    <string name="progress_minutes">43 </string>
+    <string name="progress_denom">of 60 minutes</string>
+    
+</resources>

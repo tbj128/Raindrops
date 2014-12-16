@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#c0000000"
+    android:orientation="vertical" >
+
+    <RelativeLayout
+        android:layout_width="560dip"
+        android:layout_height="360dip"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="40dip"
+        android:background="@color/off_white"
+        android:orientation="vertical" >
+
+        <!-- Top Bar -->
+
+        <RelativeLayout
+            android:id="@+id/dialog_header"
+            android:layout_width="match_parent"
+            android:layout_height="80dip"
+            android:background="@color/alert_grey"
+            android:padding="5dip" >
+
+            <Button
+                android:id="@+id/new_message_send"
+                android:layout_width="wrap_content"
+                android:layout_height="80dip"
+                android:layout_centerVertical="true"
+                android:layout_marginLeft="20dip"
+                android:layout_marginRight="10dip"
+                android:background="@null"
+                android:drawableRight="@drawable/dark_send"
+                android:text="Send"
+                android:textColor="@color/deep_grey"
+                android:textSize="22sp" />
+            
+            <ImageButton
+                android:id="@+id/new_message_close"
+                android:layout_width="80dip"
+                android:layout_height="80dip"
+                android:layout_alignParentRight="true"
+                android:layout_centerVertical="true"
+                android:layout_marginRight="10dip"
+                android:background="@null"
+                android:src="@drawable/nav_exit_button_selector" />
+        </RelativeLayout>
+
+        <!-- Future Support for Receipient -->
+
+        <EditText
+            android:id="@+id/new_message_title"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/dialog_header"
+            android:layout_margin="10dip"
+            android:ems="12"
+            android:hint="Subject" />
+
+        <EditText
+            android:id="@+id/new_message_desc"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/new_message_title"
+            android:layout_margin="10dip"
+            android:ems="12"
+            android:gravity="top"
+            android:hint="Compose message..."
+            android:lines="5" />
+    </RelativeLayout>
+
+</RelativeLayout>

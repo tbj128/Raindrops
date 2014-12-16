@@ -1,0 +1,4 @@
+Options +FollowSymLinks  
+RewriteEngine on  
+RewriteRule ^(.*)$ ../auth_read.php?file=$1 [NC]
+RewriteRule ^(.*)$ ../auth_write.php?file=$1 [NC]

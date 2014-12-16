@@ -1,0 +1,498 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/main_container"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/bg_mountains" >
+
+    <!-- Top Bar Menu -->
+
+    <RelativeLayout
+        android:id="@+id/main_top_bar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:background="@null" >
+
+        <ImageButton
+            android:id="@+id/nav_back_button"
+            android:layout_width="160dip"
+            android:layout_height="80dip"
+            android:layout_alignParentLeft="true"
+            android:layout_marginLeft="10dip"
+            android:layout_marginTop="10dip"
+            android:background="@null"
+            android:contentDescription="@string/home_button"
+            android:scaleType="fitXY"
+            android:src="@drawable/button_nav_back" />
+    </RelativeLayout>
+    <!-- Left Message Pane -->
+
+    <RelativeLayout
+        android:id="@+id/message_list_pane"
+        android:layout_width="400dip"
+        android:layout_height="500dip"
+        android:layout_centerVertical="true"
+        android:layout_marginLeft="20dip"
+        android:background="#BD1989"
+        android:padding="12dip" >
+
+        <RelativeLayout
+            android:id="@+id/message_list_pane_top"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@color/rarity_white"
+            android:padding="0dip" >
+
+            <TextView
+                android:id="@+id/message_list_pane_top_header"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentTop="true"
+                android:layout_marginLeft="10dip"
+                android:layout_marginTop="10dip"
+                android:text="Awards"
+                android:textColor="#BD1989"
+                android:textSize="24sp" />
+
+            <ListView
+                android:id="@+id/awards_list"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_alignParentTop="true"
+                android:layout_marginTop="48dip"
+                android:divider="#FFCC00"
+                android:gravity="center"
+                android:listSelector="@drawable/list_selector_blue" />
+        </RelativeLayout>
+    </RelativeLayout>
+    <!-- Right Message Viewing Pane -->
+
+    <ScrollView
+        android:layout_width="1000dip"
+        android:layout_height="500dip"
+        android:layout_centerVertical="true"
+        android:layout_marginRight="60dip"
+        android:layout_toRightOf="@+id/message_list_pane"
+        android:background="#CCFFFFFF" >
+
+        <RelativeLayout
+            android:id="@+id/message_wrapper"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:orientation="vertical" >
+
+            <!-- Top Bar -->
+
+            <RelativeLayout
+                android:id="@+id/awards_stat_header"
+                android:layout_width="match_parent"
+                android:layout_height="60dip"
+                android:background="@color/smudge_grey"
+                android:padding="5dip" >
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentLeft="true"
+                    android:layout_centerVertical="true"
+                    android:layout_marginLeft="15dip"
+                    android:text="Statistics"
+                    android:textColor="@color/message_grey"
+                    android:textSize="18sp" />
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:id="@+id/award_stat_item_progress"
+                android:layout_width="match_parent"
+                android:layout_height="70dip"
+                android:layout_below="@+id/awards_stat_header"
+                android:padding="5dip" >
+
+                <TextView
+                    android:id="@+id/award_stat_item_progress_label"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="14dip"
+                    android:layout_marginLeft="20dip"
+                    android:layout_marginRight="20dip"
+                    android:layout_marginTop="14dip"
+                    android:text="ITEM PROGRESS"
+                    android:textColor="@color/deep_grey"
+                    android:textSize="16sp" />
+
+                <TextView
+                    android:id="@+id/award_stat_item_progress_text"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentRight="true"
+                    android:layout_marginBottom="14dip"
+                    android:layout_marginRight="20dip"
+                    android:layout_marginTop="14dip"
+                    android:text="50/200"
+                    android:textColor="@color/azure"
+                    android:textSize="16sp"
+                    android:textStyle="bold" />
+
+                <RelativeLayout
+                    android:id="@+id/main_progress_bar_container"
+                    android:layout_width="match_parent"
+                    android:layout_height="6dip"
+                    android:layout_below="@+id/award_stat_item_progress_label"
+                    android:layout_marginLeft="20dip"
+                    android:layout_marginRight="20dip" >
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="6dip"
+                        android:layout_alignParentLeft="true"
+                        android:background="@color/dark_blue"
+                        android:baselineAligned="true"
+                        android:weightSum="1" >
+
+                        <LinearLayout
+                            android:id="@+id/main_progress_bar_progress"
+                            android:layout_width="0dp"
+                            android:layout_height="6dp"
+                            android:layout_weight="0.4"
+                            android:background="@color/azure"
+                            android:orientation="horizontal" >
+                        </LinearLayout>
+                    </LinearLayout>
+                </RelativeLayout>
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:id="@+id/award_stat_lifetime_container"
+                android:layout_width="match_parent"
+                android:layout_height="60dip"
+                android:layout_below="@+id/award_stat_item_progress"
+                android:padding="5dip" >
+
+                <TextView
+                    android:id="@+id/award_stat_lifetime_label"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="14dip"
+                    android:layout_marginLeft="20dip"
+                    android:layout_marginRight="20dip"
+                    android:layout_marginTop="14dip"
+                    android:text="LIFETIME MINUTES"
+                    android:textColor="@color/deep_grey"
+                    android:textSize="16sp" />
+
+                <TextView
+                    android:id="@+id/award_stat_lifetime_text"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentRight="true"
+                    android:layout_marginBottom="14dip"
+                    android:layout_marginRight="20dip"
+                    android:layout_marginTop="14dip"
+                    android:text="100"
+                    android:textColor="@color/azure"
+                    android:textSize="16sp"
+                    android:textStyle="bold" />
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:id="@+id/award_stat_avgtimeweekly_container"
+                android:layout_width="match_parent"
+                android:layout_height="60dip"
+                android:layout_below="@+id/award_stat_lifetime_container"
+                android:padding="5dip" >
+
+                <TextView
+                    android:id="@+id/award_stat_avgtimeweekly_label"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="14dip"
+                    android:layout_marginLeft="20dip"
+                    android:layout_marginRight="20dip"
+                    android:layout_marginTop="14dip"
+                    android:text="AVERAGE MINUTES PRACTICED WEEKLY"
+                    android:textColor="@color/deep_grey"
+                    android:textSize="16sp" />
+
+                <TextView
+                    android:id="@+id/award_stat_avgtimeweekly_text"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentRight="true"
+                    android:layout_marginBottom="14dip"
+                    android:layout_marginRight="20dip"
+                    android:layout_marginTop="14dip"
+                    android:text="100"
+                    android:textColor="@color/azure"
+                    android:textSize="16sp"
+                    android:textStyle="bold" />
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:id="@+id/award_stat_avgpointsweekly_container"
+                android:layout_width="match_parent"
+                android:layout_height="60dip"
+                android:layout_below="@+id/award_stat_avgtimeweekly_container"
+                android:padding="5dip" >
+
+                <TextView
+                    android:id="@+id/award_stat_avgpointsweekly_label"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="14dip"
+                    android:layout_marginLeft="20dip"
+                    android:layout_marginRight="20dip"
+                    android:layout_marginTop="14dip"
+                    android:text="AVERAGE POINTS EARNED WEEKLY"
+                    android:textColor="@color/deep_grey"
+                    android:textSize="16sp" />
+
+                <TextView
+                    android:id="@+id/award_stat_avgpointsweekly_text"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentRight="true"
+                    android:layout_marginBottom="14dip"
+                    android:layout_marginRight="20dip"
+                    android:layout_marginTop="14dip"
+                    android:text="100"
+                    android:textColor="@color/azure"
+                    android:textSize="16sp"
+                    android:textStyle="bold" />
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:id="@+id/award_stat_avgtimedaily_container"
+                android:layout_width="match_parent"
+                android:layout_height="60dip"
+                android:layout_below="@+id/award_stat_avgpointsweekly_container"
+                android:padding="5dip" >
+
+                <TextView
+                    android:id="@+id/award_stat_avgtimedaily_label"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="14dip"
+                    android:layout_marginLeft="20dip"
+                    android:layout_marginRight="20dip"
+                    android:layout_marginTop="14dip"
+                    android:text="AVERAGE HOURS PRACTICED DAILY"
+                    android:textColor="@color/deep_grey"
+                    android:textSize="16sp" />
+
+                <TextView
+                    android:id="@+id/award_stat_avgtimedaily_text"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentRight="true"
+                    android:layout_marginBottom="14dip"
+                    android:layout_marginRight="20dip"
+                    android:layout_marginTop="14dip"
+                    android:text="100"
+                    android:textColor="@color/azure"
+                    android:textSize="16sp"
+                    android:textStyle="bold" />
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:id="@+id/award_stat_avgpointsdaily_container"
+                android:layout_width="match_parent"
+                android:layout_height="60dip"
+                android:layout_below="@+id/award_stat_avgtimedaily_container"
+                android:padding="5dip" >
+
+                <TextView
+                    android:id="@+id/award_stat_avgpointsdaily_label"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="14dip"
+                    android:layout_marginLeft="20dip"
+                    android:layout_marginRight="20dip"
+                    android:layout_marginTop="14dip"
+                    android:text="AVERAGE POINTS EARNED DAILY"
+                    android:textColor="@color/deep_grey"
+                    android:textSize="16sp" />
+
+                <TextView
+                    android:id="@+id/award_stat_avgpointsdaily_text"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentRight="true"
+                    android:layout_marginBottom="14dip"
+                    android:layout_marginRight="20dip"
+                    android:layout_marginTop="14dip"
+                    android:text="100"
+                    android:textColor="@color/azure"
+                    android:textSize="16sp"
+                    android:textStyle="bold" />
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:id="@+id/award_stat_messages_container"
+                android:layout_width="match_parent"
+                android:layout_height="60dip"
+                android:layout_below="@+id/award_stat_avgpointsdaily_container"
+                android:padding="5dip" >
+
+                <TextView
+                    android:id="@+id/award_stat_messages_label"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="14dip"
+                    android:layout_marginLeft="20dip"
+                    android:layout_marginRight="20dip"
+                    android:layout_marginTop="14dip"
+                    android:text="TOTAL MESSAGES"
+                    android:textColor="@color/deep_grey"
+                    android:textSize="16sp" />
+
+                <TextView
+                    android:id="@+id/award_stat_messages_text"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentRight="true"
+                    android:layout_marginBottom="14dip"
+                    android:layout_marginRight="20dip"
+                    android:layout_marginTop="14dip"
+                    android:text="100"
+                    android:textColor="@color/azure"
+                    android:textSize="16sp"
+                    android:textStyle="bold" />
+            </RelativeLayout>
+        </RelativeLayout>
+    </ScrollView>
+
+    <!-- Bottom Bar -->
+
+    <RelativeLayout
+        android:id="@+id/main_bottom_bar"
+        android:layout_width="match_parent"
+        android:layout_height="80dp"
+        android:layout_alignParentBottom="true"
+        android:background="@null" >
+
+        <!-- Logo Left -->
+
+        <TextView
+            android:id="@+id/bottom_nav_logo_l"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="20dip"
+            android:text="@string/epic"
+            android:textColor="@color/white"
+            android:textSize="60sp"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/bottom_nav_logo_r"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="2dip"
+            android:layout_toRightOf="@+id/bottom_nav_logo_l"
+            android:text="@string/wheels"
+            android:textColor="@color/white"
+            android:textSize="60sp" />
+
+        <!-- Minutes Practiced -->
+
+        <TextView
+            android:id="@+id/bottom_practiced_today"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="560dip"
+            android:text="1280"
+            android:textColor="@color/rarity_white"
+            android:textSize="24sp" />
+
+        <TextView
+            android:id="@+id/bottom_practiced_today_desc"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="2dip"
+            android:layout_toRightOf="@+id/bottom_practiced_today"
+            android:text=" min today"
+            android:textColor="@color/blue_white"
+            android:textSize="18sp" />
+
+        <TextView
+            android:id="@+id/bottom_progress_text_minutes"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="40dip"
+            android:layout_toRightOf="@+id/bottom_practiced_today_desc"
+            android:text="@string/progress_minutes"
+            android:textColor="@color/white"
+            android:textSize="24sp" />
+
+        <TextView
+            android:id="@+id/bottom_progress_text_denom"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_toRightOf="@+id/bottom_progress_text_minutes"
+            android:text=" of 60 min goal"
+            android:textColor="@color/dull_blue"
+            android:textScaleX="0.95"
+            android:textSize="18sp" />
+
+        <!-- Progress Bar -->
+
+        <RelativeLayout
+            android:id="@+id/bottom_progress_bar_container"
+            android:layout_width="380dip"
+            android:layout_height="3dip"
+            android:layout_alignParentLeft="true"
+            android:layout_below="@+id/bottom_progress_text_minutes"
+            android:layout_marginLeft="560dip" >
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="3dip"
+                android:layout_alignParentLeft="true"
+                android:background="@color/dark_blue"
+                android:baselineAligned="true"
+                android:weightSum="1" >
+
+                <LinearLayout
+                    android:id="@+id/bottom_progress_bar_progress"
+                    android:layout_width="0dp"
+                    android:layout_height="3dp"
+                    android:layout_weight="0.4"
+                    android:background="@color/light_blue"
+                    android:orientation="horizontal" >
+                </LinearLayout>
+            </LinearLayout>
+        </RelativeLayout>
+
+        <ImageButton
+            android:id="@+id/bottom_nav_awards"
+            android:layout_width="60dip"
+            android:layout_height="60dip"
+            android:layout_centerVertical="true"
+            android:layout_marginRight="14dip"
+            android:layout_toLeftOf="@+id/bottom_nav_bookmarks"
+            android:background="@null"
+            android:scaleType="fitXY"
+            android:src="@drawable/nav_awards" />
+
+        <ImageButton
+            android:id="@+id/bottom_nav_bookmarks"
+            android:layout_width="60dip"
+            android:layout_height="60dip"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:layout_marginRight="30dip"
+            android:background="@null"
+            android:scaleType="fitXY"
+            android:src="@drawable/nav_bookmarks" />
+    </RelativeLayout>
+
+</RelativeLayout>

@@ -1,0 +1,13 @@
+/* @author: Tom Jin */
+
+.box-width {
+	width:720px;
+}
+
+.align-center {
+	margin: 60px auto 0 auto;
+}
+
+.align-center-top {
+	margin: 10px auto 0 auto;
+}

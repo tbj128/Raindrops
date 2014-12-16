@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="90dip" >
+
+    <ImageView
+        android:id="@+id/award_img"
+        android:layout_width="80dip"
+        android:layout_height="80dip"
+        android:layout_alignParentLeft="true"
+        android:layout_marginLeft="5dip"
+        android:scaleType="fitCenter"
+        android:src="@drawable/award_unknown" />
+
+    <RelativeLayout
+        android:id="@+id/award_title_parent"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginLeft="10dip"
+        android:layout_marginTop="14dip"
+        android:layout_toRightOf="@+id/award_img" >
+
+        <TextView
+            android:id="@+id/award_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Consecutive Streak"
+            android:textColor="@color/deep_grey"
+            android:textSize="26sp" />
+        
+        <TextView
+            android:id="@+id/award_desc"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/award_title"
+            android:text="Earned when you've practiced two days in a row"
+            android:textColor="#999999"
+            android:textSize="18sp" />
+    </RelativeLayout>
+
+</RelativeLayout>

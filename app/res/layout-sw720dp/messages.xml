@@ -1,0 +1,445 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/main_container"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/bg_mountains" >
+
+    <!-- Top Bar Menu -->
+
+    <RelativeLayout
+        android:id="@+id/main_top_bar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:background="@null" >
+
+        <ImageButton
+            android:id="@+id/nav_back_button"
+            android:layout_width="160dip"
+            android:layout_height="80dip"
+            android:layout_alignParentLeft="true"
+            android:layout_marginLeft="10dip"
+            android:layout_marginTop="10dip"
+            android:background="@null"
+            android:contentDescription="@string/home_button"
+            android:scaleType="fitXY"
+            android:src="@drawable/button_nav_back" />
+    </RelativeLayout>
+    <!-- Left Message Pane -->
+
+    <RelativeLayout
+        android:id="@+id/message_list_pane"
+        android:layout_width="400dip"
+        android:layout_height="500dip"
+        android:layout_centerVertical="true"
+        android:layout_marginLeft="20dip"
+        android:background="#1f5c9a"
+        android:padding="12dip" >
+
+        <RelativeLayout
+            android:id="@+id/message_list_pane_inner"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@color/rarity_white"
+            android:padding="0dip" >
+
+            <TextView
+                android:id="@+id/message_list_pane_top_header"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentTop="true"
+                android:layout_marginLeft="10dip"
+                android:layout_marginTop="10dip"
+                android:text="Inbox (1)"
+                android:textColor="#1f5c9a"
+                android:textSize="24sp" />
+
+            <ListView
+                android:id="@+id/message_list"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_alignParentTop="true"
+                android:layout_marginBottom="50dip"
+                android:layout_marginTop="48dip"
+                android:divider="#FFCC00"
+                android:gravity="center"
+                android:listSelector="@drawable/list_selector_blue" />
+
+            <TextView
+                android:id="@+id/message_none"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerHorizontal="true"
+                android:layout_centerVertical="true"
+                android:text="No messages yet."
+                android:textColor="@color/message_grey"
+                android:textSize="18sp"
+                android:visibility="gone" />
+
+            <RelativeLayout
+                android:id="@+id/message_list_pane_bottom"
+                android:layout_width="match_parent"
+                android:layout_height="60dip"
+                android:layout_alignParentBottom="true"
+                android:background="@color/smudge_grey"
+                android:padding="0dip" >
+
+                <Button
+                    android:id="@+id/message_list_pane_bottom_switch"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:layout_centerVertical="true"
+                    android:background="@drawable/message_smudge_button_selector"
+                    android:drawableLeft="@drawable/dark_mail"
+                    android:text="Outbox"
+                    android:textColor="@color/message_grey"
+                    android:textSize="18sp" />
+
+                <Button
+                    android:id="@+id/message_list_pane_bottom_refresh"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:layout_alignParentRight="true"
+                    android:layout_centerVertical="true"
+                    android:background="@drawable/message_smudge_button_selector"
+                    android:drawableLeft="@drawable/dark_refresh"
+                    android:drawablePadding="8dip"
+                    android:text="Refresh"
+                    android:textColor="@color/message_grey"
+                    android:textSize="18sp" />
+            </RelativeLayout>
+        </RelativeLayout>
+    </RelativeLayout>
+    <!-- Right Message Viewing Pane -->
+
+    <ScrollView
+        android:layout_width="1000dip"
+        android:layout_height="500dip"
+        android:layout_centerVertical="true"
+        android:layout_marginRight="60dip"
+        android:layout_toRightOf="@+id/message_list_pane"
+        android:background="#EDFFFFFF" >
+
+        <RelativeLayout
+            android:id="@+id/message_wrapper"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:orientation="vertical"
+            android:visibility="gone" >
+
+            <!-- Top Bar -->
+
+            <RelativeLayout
+                android:id="@+id/message_header"
+                android:layout_width="match_parent"
+                android:layout_height="60dip"
+                android:background="@color/smudge_grey"
+                android:padding="5dip" >
+
+                <TextView
+                    android:id="@+id/message_from"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentLeft="true"
+                    android:layout_centerVertical="true"
+                    android:layout_marginLeft="15dip"
+                    android:text="from Twilight"
+                    android:textColor="@color/message_grey"
+                    android:textSize="18sp" />
+
+                <ImageButton
+                    android:id="@+id/message_trash"
+                    android:layout_width="40dip"
+                    android:layout_height="40dip"
+                    android:layout_alignParentRight="true"
+                    android:layout_centerVertical="true"
+                    android:layout_marginRight="10dip"
+                    android:background="@null"
+                    android:src="@drawable/dark_trash" />
+            </RelativeLayout>
+
+            <TextView
+                android:id="@+id/message_title"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/message_header"
+                android:layout_marginBottom="14dip"
+                android:layout_marginLeft="20dip"
+                android:layout_marginRight="20dip"
+                android:layout_marginTop="14dip"
+                android:text="Message Title Goes Here"
+                android:textColor="@color/deep_grey"
+                android:textSize="24sp"
+                android:visibility="gone" />
+
+            <RelativeLayout
+                android:id="@+id/message_text_container"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/message_title" >
+
+                <TextView
+                    android:id="@+id/message_desc"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/message_video_seekbar"
+                    android:layout_marginBottom="6dip"
+                    android:layout_marginLeft="20dip"
+                    android:layout_marginRight="20dip"
+                    android:layout_marginTop="4dip"
+                    android:paddingBottom="10dip"
+                    android:paddingTop="10dip"
+                    android:text="Lorem ipsum asee nnqlks iopzm jaqqz jzno dkkenwen I owlkn"
+                    android:textColor="@color/deep_grey"
+                    android:textSize="14sp"
+                    android:visibility="gone" />
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:id="@+id/message_media_container"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_below="@+id/message_text_container"
+                android:visibility="gone" >
+
+                <RelativeLayout
+                    android:id="@+id/message_video_container"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_centerHorizontal="true" >
+
+                    <LinearLayout
+                        android:id="@+id/message_video_container_inner"
+                        android:layout_width="540dip"
+                        android:layout_height="320dip"
+                        android:layout_centerHorizontal="true"
+                        android:gravity="center"
+                        android:visibility="gone" >
+
+                        <VideoView
+                            android:id="@+id/message_video"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent" />
+                    </LinearLayout>
+
+                    <SeekBar
+                        android:id="@+id/message_video_seekbar"
+                        android:layout_width="540dip"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@+id/message_video_container_inner"
+                        android:layout_centerHorizontal="true"
+                        android:layout_marginTop="5dip" />
+
+                    <TextView
+                        android:id="@+id/message_video_time"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentRight="true"
+                        android:layout_below="@+id/message_video_seekbar"
+                        android:layout_marginBottom="6dip"
+                        android:layout_marginRight="140dip"
+                        android:layout_marginTop="4dip"
+                        android:text="1:01/2:20"
+                        android:textColor="@color/deep_grey"
+                        android:textSize="14sp" />
+                </RelativeLayout>
+
+                <RelativeLayout
+                    android:id="@+id/message_play_pause"
+                    android:layout_width="40dip"
+                    android:layout_height="40dip"
+                    android:layout_below="@+id/message_video_container"
+                    android:layout_centerHorizontal="true" >
+
+                    <ImageButton
+                        android:id="@+id/message_pause"
+                        android:layout_width="40dip"
+                        android:layout_height="40dip"
+                        android:background="@null"
+                        android:scaleType="fitXY"
+                        android:src="@drawable/dark_pause"
+                        android:visibility="gone" />
+
+                    <ImageButton
+                        android:id="@+id/message_play"
+                        android:layout_width="40dip"
+                        android:layout_height="40dip"
+                        android:background="@null"
+                        android:scaleType="fitXY"
+                        android:src="@drawable/dark_play" />
+                </RelativeLayout>
+
+                <ImageButton
+                    android:id="@+id/message_rewind"
+                    android:layout_width="40dip"
+                    android:layout_height="40dip"
+                    android:layout_below="@+id/message_video_container"
+                    android:layout_centerHorizontal="true"
+                    android:layout_marginRight="60dip"
+                    android:layout_toLeftOf="@+id/message_play_pause"
+                    android:background="@null"
+                    android:scaleType="fitXY"
+                    android:src="@drawable/dark_rewind" />
+
+                <ImageButton
+                    android:id="@+id/message_forward"
+                    android:layout_width="40dip"
+                    android:layout_height="40dip"
+                    android:layout_below="@+id/message_video_container"
+                    android:layout_centerHorizontal="true"
+                    android:layout_marginLeft="60dip"
+                    android:layout_toRightOf="@+id/message_play_pause"
+                    android:background="@null"
+                    android:scaleType="fitXY"
+                    android:src="@drawable/dark_forward" />
+            </RelativeLayout>
+        </RelativeLayout>
+    </ScrollView>
+
+    <!-- Bottom Bar -->
+
+    <RelativeLayout
+        android:id="@+id/main_bottom_bar"
+        android:layout_width="match_parent"
+        android:layout_height="80dp"
+        android:layout_alignParentBottom="true"
+        android:background="@null" >
+
+        <!-- Logo Left -->
+
+        <TextView
+            android:id="@+id/bottom_nav_logo_l"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="20dip"
+            android:text="@string/epic"
+            android:textColor="@color/white"
+            android:textSize="60sp"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/bottom_nav_logo_r"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="2dip"
+            android:layout_toRightOf="@+id/bottom_nav_logo_l"
+            android:text="@string/wheels"
+            android:textColor="@color/white"
+            android:textSize="60sp" />
+
+        <!-- Minutes Practiced -->
+
+        <TextView
+            android:id="@+id/bottom_practiced_today"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="560dip"
+            android:text="1280"
+            android:textColor="@color/rarity_white"
+            android:textSize="24sp" />
+
+        <TextView
+            android:id="@+id/bottom_practiced_today_desc"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="2dip"
+            android:layout_toRightOf="@+id/bottom_practiced_today"
+            android:text=" min today"
+            android:textColor="@color/blue_white"
+            android:textSize="18sp" />
+
+        <TextView
+            android:id="@+id/bottom_progress_text_minutes"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="40dip"
+            android:layout_toRightOf="@+id/bottom_practiced_today_desc"
+            android:text="@string/progress_minutes"
+            android:textColor="@color/white"
+            android:textSize="24sp" />
+
+        <TextView
+            android:id="@+id/bottom_progress_text_denom"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_toRightOf="@+id/bottom_progress_text_minutes"
+            android:text=" of 60 min goal"
+            android:textColor="@color/dull_blue"
+            android:textScaleX="0.95"
+            android:textSize="18sp" />
+
+        <!-- Progress Bar -->
+
+        <RelativeLayout
+            android:id="@+id/bottom_progress_bar_container"
+            android:layout_width="380dip"
+            android:layout_height="3dip"
+            android:layout_alignParentLeft="true"
+            android:layout_below="@+id/bottom_progress_text_minutes"
+            android:layout_marginLeft="560dip" >
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="3dip"
+                android:layout_alignParentLeft="true"
+                android:background="@color/dark_blue"
+                android:baselineAligned="true"
+                android:weightSum="1" >
+
+                <LinearLayout
+                    android:id="@+id/bottom_progress_bar_progress"
+                    android:layout_width="0dp"
+                    android:layout_height="3dp"
+                    android:layout_weight="0.4"
+                    android:background="@color/light_blue"
+                    android:orientation="horizontal" >
+                </LinearLayout>
+            </LinearLayout>
+        </RelativeLayout>
+
+        <ImageButton
+            android:id="@+id/bottom_nav_awards"
+            android:layout_width="60dip"
+            android:layout_height="60dip"
+            android:layout_centerVertical="true"
+            android:layout_marginRight="14dip"
+            android:layout_toLeftOf="@+id/bottom_nav_bookmarks"
+            android:background="@null"
+            android:scaleType="fitXY"
+            android:src="@drawable/nav_awards" />
+
+        <ImageButton
+            android:id="@+id/bottom_nav_bookmarks"
+            android:layout_width="60dip"
+            android:layout_height="60dip"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:layout_marginRight="30dip"
+            android:background="@null"
+            android:scaleType="fitXY"
+            android:src="@drawable/nav_bookmarks" />
+    </RelativeLayout>
+
+    <ImageButton
+        android:id="@+id/message_compose"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
+        android:layout_marginRight="15dip"
+        android:layout_marginTop="4dip"
+        android:background="@null"
+        android:paddingBottom="5dip"
+        android:paddingTop="5dip"
+        android:src="@drawable/mail_new" />
+
+</RelativeLayout>

@@ -1,0 +1,107 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#c0000000"
+    android:orientation="vertical" >
+
+    <RelativeLayout
+        android:layout_width="560dip"
+        android:layout_height="360dip"
+        android:layout_centerHorizontal="true"
+        android:layout_gravity="center"
+        android:layout_marginRight="20dip"
+        android:layout_marginTop="40dip"
+        android:background="@color/dull_green"
+        android:orientation="vertical"
+        android:padding="24dip" >
+
+        <TextView
+            android:id="@+id/dialog_login"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="20dip"
+            android:layout_marginRight="8dip"
+            android:layout_marginTop="20dip"
+            android:text="Login"
+            android:textColor="@color/white"
+            android:textSize="36sp" />
+
+        <TextView
+            android:id="@+id/dialog_login_r"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginRight="2dip"
+            android:layout_marginTop="20dip"
+            android:layout_toRightOf="@+id/dialog_login"
+            android:text="to raindrops"
+            android:textColor="@color/login_green"
+            android:textSize="36sp" />
+
+        <TextView
+            android:id="@+id/dialog_login_password_label"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/dialog_login_r"
+            android:layout_marginLeft="20dip"
+            android:layout_marginTop="30dip"
+            android:text=""
+            android:textColor="@color/white"
+            android:textSize="18sp" />
+
+        <EditText
+            android:id="@+id/dialog_login_username"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/dialog_login_password_label"
+            android:layout_centerHorizontal="true"
+            android:layout_marginLeft="20dip"
+            android:padding="8dip"
+            android:layout_marginRight="20dip"
+            android:layout_marginTop="6dip"
+            android:background="@color/rarity_white"
+            android:ems="12"
+            android:hint="Username" >
+        </EditText>
+
+        <EditText
+            android:id="@+id/dialog_login_password"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/dialog_login_username"
+            android:layout_centerHorizontal="true"
+            android:layout_marginLeft="20dip"
+            android:layout_marginRight="20dip"
+            android:layout_marginTop="6dip"
+            android:padding="8dip"
+            android:background="@color/rarity_white"
+            android:ems="12"
+            android:hint="Password"
+            android:inputType="textPassword" >
+        </EditText>
+
+        <Button
+            android:id="@+id/dialog_continue"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/dialog_login_password"
+            android:layout_centerHorizontal="true"
+            android:layout_marginLeft="15dip"
+            android:layout_marginTop="12dip"
+            android:background="@drawable/nav_white_button_selector"
+            android:text="Okay"
+            android:textColor="@color/deep_grey"
+            android:textSize="24sp" />
+    </RelativeLayout>
+
+    <ImageButton
+        android:id="@+id/dialog_close"
+        android:layout_width="80dip"
+        android:layout_height="80dip"
+        android:layout_alignParentRight="true"
+        android:layout_marginRight="320dip"
+        android:layout_marginTop="0dip"
+        android:background="@null"
+        android:src="@drawable/nav_exit_button_selector" />
+
+</RelativeLayout>

@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<selector xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item android:drawable="@drawable/green_bg_submenu" android:state_activated="true"/>
+    <item android:drawable="@drawable/blue_bg_submenu_larger" android:state_selected="true"/>
+    <item android:drawable="@drawable/bg_main_menu" android:state_selected="false"/>
+
+</selector>
