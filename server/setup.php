@@ -1,52 +1,54 @@
 <?php
 	session_start();
 	
+	include 'config.php';
+
 	$php_config = 'config.php';
-
-	$alert_show = false;
+	$is_password_different = false;
+	$is_config_empty = false;
 	
-	if (file_exists($php_config)) {
-		// Redirect to index.php
-		header("Location: index.php");
+	if (!file_exists($php_config)) {
+		printf("Error: No config.php file found");
+		exit();
+	}
+	
+	$connection = new mysqli($db_host, $db_username, $db_password);
+	if (mysqli_connect_errno()) {
+		$db_selected = mysqli_select_db($connection, $db_database);
+		if ($db_selected) {
+			// Successful database link established
+			header("Location: index.php");
+		}
+	}
+	
+	if ($app_name == "" || 
+		$admin_user == "" ||
+		$db_host == "" ||
+		$db_username == "" ||
+		$db_password == "" ||
+		$db_database == "") {
+		$is_config_empty = true;
 	} else {
-		if( isset($_POST['app_name']) && 
-			isset($_POST['admin_username']) && 
-			isset($_POST['admin_password']) && 
-			isset($_POST['mysql_hostname']) && 
-			isset($_POST['mysql_username']) && 
-			isset($_POST['mysql_password']) &&
-			isset($_POST['mysql_database'])) {
+		if( isset($_POST['admin_password']) &&
+			isset($_POST['admin_password_confirm'])) {
 			
-			$app_name = $_POST['app_name'];
-			$admin_username = $_POST['admin_username'];
-			$admin_password = $_POST['admin_password']; 
-			$mysql_hostname = $_POST['mysql_hostname']; 
-			$mysql_username = $_POST['mysql_username'];
-			$mysql_password = $_POST['mysql_password'];
-			$mysql_database = $_POST['mysql_database'];
+			$admin_password = $_POST['admin_password'];
+			$admin_password_confirm = $_POST['admin_password_confirm'];
 			
-			$config_output = '<?php 
-				$app_name = "' . $app_name . '";
-				$admin_user = "'. $admin_username. '";
-				$db_host = "'. $mysql_hostname. '";
-				$db_username = "'. $mysql_username. '";
-				$db_password = "'. $mysql_password. '";
-				$db_database = "'. $mysql_database. '";
-			?>';
+			if ($admin_password == "" 
+				|| $admin_password_confirm == "" 
+				|| $admin_password != $admin_password_confirm) {
+				$is_password_different = true;
+			} else {
+				$_SESSION['admin_username'] = $admin_user;
+				$_SESSION['admin_password'] = $admin_password;
 			
-
-			$fp = fopen("config.php", "w");
-			fwrite($fp, $config_output);
-			fclose($fp);
-			
-			$_SESSION['admin_username'] = $admin_username;
-			$_SESSION['admin_password'] = $admin_password;
-			
-			header("Location: setup_db.php");
+				header("Location: setup_db.php");
+			}
 		} else {
 			if (count($_POST) > 0) {
 				// Form post error
-				$alert_show = true;
+				$is_password_different = true;
 			}
 		}
 		
@@ -61,7 +63,7 @@
     <meta name="description" content="">
     <meta name="author" content="">
 
-    <title>Raindrops </title>
+    <title>Setup</title>
 
     <!-- Bootstrap core CSS -->
     <link href="css/bootstrap.css" rel="stylesheet">
@@ -76,7 +78,7 @@
 
     <div id="wrapper">
 		<?php
-			if ($alert_show) {
+			if ($is_password_different) {
 		?>
 		<div class="alert alert-warning alert-dismissable box-width align-center-top">
 			<button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
@@ -87,37 +89,45 @@
 		?>
 		
 		<div class="jumbotron box-width align-center">
-		  <h1>Hi! <small>Let's get setup</small></h1>
-		  
-		  <!-- Check PHP; Add form validation -->
-				<form method="post" action="">
-					<div class="form-group">
-						<label>Application</label>
-						<input class="form-control" name="app_name" placeholder="Application Name" minlength="4" >
-					</div>
-					<div class="form-group">
-						<label>Admin</label>
-						<input class="form-control" name="admin_username" placeholder="Administrator Username" minlength="4" >
-					</div>
-					<div class="form-group">
-						<input class="form-control" name="admin_password" type="password" placeholder="Administrator Password" minlength="4" >
-					</div>
-					<div class="form-group">
-						<label>MySQL</label>
-						<input class="form-control" name="mysql_hostname" placeholder="MySQL Hostname" >
-						<p class="help-block"><h4>&nbsp;&nbsp;&nbsp;<small></small></h4></p>
-					</div>
-					<div class="form-group">
-						<input class="form-control" name="mysql_username" placeholder="MySQL Username" >
-					</div>
-					<div class="form-group">
-						<input class="form-control" name="mysql_password" type="password" placeholder="MySQL Password" >
-					</div>
-					<div class="form-group">
-						<input class="form-control" name="mysql_database" placeholder="Database Name (will be created)" >
-					</div>
-					<p><input type="submit" class="btn btn-primary btn-lg" role="button" text="Continue"></p>
-				</form>
+			<h1>Hi! <small>Let's get setup</small></h1>
+	  
+	  		<?php
+	  			if ($is_config_empty) {
+	  		?>
+	  		
+	  		You will need to first manually configure the config.php file on the server. An example is shown below:
+	  		<pre>
+&lt;?php 
+	$app_name = &quot;Raindrops&quot;;
+	$admin_user = &quot;administrator&quot;;
+	$db_host = &quot;localhost&quot;;
+	$db_username = &quot;root&quot;;
+	$db_password = &quot;Password1&quot;;
+	$db_database = &quot;raindrops&quot;;
+?&gt;
+	  		</pre>
+	  		
+	  		<?php
+	  			} else {
+	  		?>
+	  		
+	  		<p>
+	  		Before we configure the database for the first time, choose the password for the <?php echo $admin_user; ?> account.
+	  		</p>
+	  		
+			<form method="post" action="">
+				<div class="form-group">
+					<input class="form-control" name="admin_password" type="password" placeholder="Administrator Password" minlength="4" >
+				</div>
+				<div class="form-group">
+					<input class="form-control" name="admin_password_confirm" type="password" placeholder="Confirm Administrator Password" minlength="4" >
+				</div>
+				<p><input type="submit" class="btn btn-primary btn-lg" role="button" text="Continue"></p>
+			</form>
+			
+			<?php
+				}
+			?>
 		</div>
 
     </div><!-- /#wrapper -->
