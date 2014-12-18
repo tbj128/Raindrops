@@ -46,7 +46,7 @@
     <meta name="description" content="">
     <meta name="author" content="">
 
-    <title>Compose</title>
+    <title>Compose New Message</title>
 
     <!-- Bootstrap core CSS -->
     <link href="css/bootstrap.css" rel="stylesheet">
@@ -76,17 +76,7 @@
 					</div>
 					<div class="form-group input-group">
 						<span class="input-group-addon">To</span>
-						<select class="form-control" name="msg_id_to">
-							<?php
-								foreach ($users as $uid => $uname) {
-									if ($uname == $admin_user) {
-										echo '<option value="' . $uid . '">' . $uname . ' (admin)</option>'; 
-									} else {
-										echo '<option value="' . $uid . '">' . $uname . '</option>';
-									}
-								}
-							?>
-						</select>
+						<input id="msg_id_to" class="form-control" name="msg_id_to" placeholder="To" >
 					</div>
 					<div class="form-group">
 						<input class="form-control" name="msg_title" placeholder="Subject" >
@@ -126,6 +116,9 @@
     <script src="js/jquery-1.10.2.js"></script>
     <script src="js/bootstrap.js"></script>
     <script src="recorderjs/recorder.js"></script>
+    <!-- TypeAhead and Tags -->
+	<script src="js/bootstrap-tagsinput.js"></script>
+	<script src="js/bootstrap3-typeahead.min.js"></script>
 
     <!-- Page Specific Plugins -->
     <script>
@@ -207,6 +200,8 @@
 				send();
 			}
 		});
+		
 	</script>
+	
   </body>
 </html>

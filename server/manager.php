@@ -115,12 +115,6 @@ $num_unread = getNumberUnreadMessages($mysqli, $user_id);
 			color:#4AABFF;
 		}
 		
-		#contextMenu {
-			position: absolute;
-			display:none;
-			z-index:9999;
-		}
-		
 
 	</style>
   </head>
@@ -201,7 +195,7 @@ $num_unread = getNumberUnreadMessages($mysqli, $user_id);
               <li class="active"><i class="fa fa-list"></i> Main</li>
             </ol>
 			<div id="alert-no-items" class="alert alert-info alert-dismissable" style="display:none;">
-              <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
+              <button type="button" class="close" data-dismiss="alert" aria-hidden="true">ï¿½</button>
 			  <strong>This folder has no items yet.</strong> Click "Add New Item" to add a new item into this folder.
             </div>
 			<?php 

@@ -31,7 +31,13 @@
 	} else {
 		$alert_show = true;
 	}
-	
+
+	$user_type = userType($mysqli, $user_id);
+	if ($user_type != "admin") {
+		header("Location: index");
+	}
+
+	$parent_name = userLookup($mysqli, $parent);
 
 ?>
 
@@ -69,29 +75,21 @@
 		?>
 		
 		<div class="jumbotron box-width align-center">
-		  <h1>Register</h1>
-		  <h3>Create a new trainee account.</h3><h4>This will allow you to track their progress through <?php echo $app_name ?>.</h4><br />
+		  <h2>Link an Existing Trainee</h2>
+		  <p>Link an existing trainee to the trainer <strong><?php echo $parent_name; ?></strong>.</p>
 		  
-				<form method="post" action="includes/process_trainee.php">
+				<form method="post" action="includes/process_existing_trainee.php">
 					<input type="hidden" name="parent" value="<?php echo $parent; ?>" >
-					
-					<div class="form-group">
-						<input class="form-control" name="username" placeholder="Username" minlength="4" >
-					</div>
-					<div class="form-group">
-						<input class="form-control" id="password" name="password" type="password" placeholder="Password" minlength="4" >
-					</div>
-					<div class="form-group">
-						<input class="form-control" id="confirmpwd" name="confirmpwd" type="password" placeholder="Confirm Password" minlength="4" >
-					</div>
-					<p> <input type="button" 
-						class="btn btn-primary btn-lg" 
-						value="Create" 
-						onclick="return regformhash(this.form,
-                                   this.form.username,
-                                   this.form.password,
-                                   this.form.confirmpwd,
-								   this.form.parent);" /> </p>
+					<select name="trainee">
+					<?php
+						$trainees = findAllTrainees($mysqli);
+						foreach ($trainees as $trainee) {
+							$trainee_name = userLookup($mysqli, $trainee);
+							echo '<option value="' . $trainee . '">' . $trainee_name . '</option>';
+						}
+					?>
+					</select><br />
+					<input type="submit" class="btn btn-primary btn-lg" />
 				</form>
 		</div>
 
@@ -101,8 +99,5 @@
 	<script src="js/jquery-1.7.2.js"></script>
     <script src="js/bootstrap.js"></script>
 	
-	<script type="text/JavaScript" src="js/sha512.js"></script> 
-	<script type="text/JavaScript" src="js/forms.js"></script> 
-
   </body>
 </html>

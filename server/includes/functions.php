@@ -350,6 +350,27 @@ function allUserLookup($mysqli) {
 	return $users;
 }
 
+function findAllTrainees($mysqli) {
+	$trainees = array();
+	$type = "2";
+
+	if ($stmt = $mysqli->prepare("SELECT id FROM raindrops_members
+										  WHERE type = ? ")) {
+		$stmt->bind_param('s', $type);
+		$stmt->execute();   // Execute the prepared query.
+		$stmt->store_result();
+
+		if ($stmt->num_rows >= 1) {
+			// If the user exists get variables from result.
+			$stmt->bind_result($id);
+			while ($stmt->fetch()) {
+				$trainees[] = $id;
+			}
+		}
+	}
+	return $trainees;
+}
+
 function findTrainees($mysqli, $parent_id) {
 	$trainees = array();
 
@@ -386,6 +407,11 @@ function findTrainer($mysqli, $user_id) {
 		}
 	}
 	return $id_parent;
+}
+
+function deleteAccount($mysqli, $user_id) {
+	$mysqli->query("DELETE FROM raindrops_members WHERE id = $user_id");
+	$mysqli->query("DELETE FROM raindrops_relations WHERE id_parent = $user_id OR id_child = $user_id");
 }
 
 // ===============================================================================================

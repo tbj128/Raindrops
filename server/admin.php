@@ -24,7 +24,8 @@
 	$user_id = $_SESSION['user_id'];
 	$username = $_SESSION['username'];
 	
-	if ($username != $admin_user) {
+	$user_type = userType($mysqli, $user_id);
+	if ($user_type != "admin") {
 		header("Location: index");
 	}
 	// ======================
@@ -69,6 +70,12 @@
 		}
 	?>
 	
+	<div id="contextMenu" class="dropdown clearfix">
+		<ul class="dropdown-menu" role="menu" aria-labelledby="dropdownMenu" style="display:block;position:static;margin-bottom:5px;">
+			<li><a id="delete-trainer" tabindex="-1" href="#">Delete Trainer</a></li>
+		</ul>
+	</div>
+	
     <div id="wrapper">
 
       <!-- Sidebar -->
@@ -97,8 +104,9 @@
                 <div class="list-group">
 				  <?php
 						foreach ($children as $trainer) {
-							echo '<a href="user?id=' . $trainer . '" class="list-group-item">
-									<i class="fa fa-user"></i>&nbsp;&nbsp;' . userLookup($mysqli, $trainer) . '
+							$trainerName = userLookup($mysqli, $trainer);
+							echo '<a href="user?id=' . $trainer . '" class="list-group-item trainer-item" data-id="' . $trainer . '" data-name="' . $trainerName . '">
+									<i class="fa fa-user"></i>&nbsp;&nbsp;' . $trainerName . '
 								  </a>';
 						}
 				  ?>
@@ -163,6 +171,59 @@
     <!-- Page Specific Plugins -->
     <script src="js/tablesorter/jquery.tablesorter.js"></script>
     <script src="js/tablesorter/tables.js"></script>
+
+	<script>
+		var clickedTrainerName;
+		var clickedTrainerID;
+		
+		$("body").on("contextmenu", ".trainer-item", function (e) {
+			clickedTrainerID = $(this).data('id');
+			clickedTrainerName = $(this).data('name');
+			$('#contextMenu').css({
+				display: "block",
+				left: e.pageX,
+				top: e.pageY
+			});
+			return false;
+		});
+		
+		$('#delete-trainer').click(function() {
+			_openWarningPopup(clickedTrainerID, clickedTrainerName);
+		});
+		
+		$('body').click(function () {
+			$('#contextMenu').hide();
+		});
+		
+		function _openWarningPopup(trainerID, trainerName) {
+			var confirmPopupHTML = '<div id="whiteout"></div>\
+							<div id="warning-popup" class="thumbnail warning-popup">\
+								<div class="caption">\
+									<h4>Delete ' + trainerName + '?</h4><br />\
+									<p>This will not delete any trainees associated with this trainer</p>\
+									<p>';
+		
+			confirmPopupHTML += '<a id="delete-confirm" href="#" class="btn btn-primary" role="button">Delete ' + trainerName + '</a><br />';
+			confirmPopupHTML += '<a id="delete-cancel" href="#" class="btn btn-default" role="button">Cancel</a>\
+							</p>\
+						</div>\
+					</div>';
+		
+			if ($('#whiteout').length <= 0) {
+				$('body').append(confirmPopupHTML);
+			}
+			
+			$('#delete-confirm').click(function() {
+				$('#whiteout').remove();
+				$('#warning-popup').remove();
+				window.location.href = 'delete_trainer.php?id=' + trainerID;
+			});
+			$('#delete-cancel').click(function() {
+				$('#whiteout').remove();
+				$('#warning-popup').remove();
+			});
+		}
+	</script>
 
   </body>
 </html>

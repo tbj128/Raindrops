@@ -38,7 +38,7 @@
 	if ($user_type != 2) {
 		$children = findTrainees($mysqli, $user_id);
 		// Security check: Is user allowed to access this trainee's data?
-		if (!in_array($id_user, $children)) {
+		if ($user_type != "admin" && !in_array($id_user, $children)) {
 			printf("Invalid permissions.\n");
 			exit();
 		}
@@ -111,11 +111,14 @@
                 <div class="list-group">
 				  <?php
 						foreach ($target_children as $trainee) {
-							echo '<a href="#" class="list-group-item" data-container="body" data-toggle="popover" data-placement="right" data-content="Login as ' . $name_user . ' to see this user\'s info.">
+							echo '<a href="user?id=' . $trainee . '" class="list-group-item">
 									<i class="fa fa-user"></i>&nbsp;&nbsp;' . userLookup($mysqli, $trainee) . '
 								  </a>';
 						}
 				  ?>
+				  <a id="newTraineePrompt" href="#" class="list-group-item">
+					<i class="fa fa-plus"></i>&nbsp;&nbsp;New Trainee
+				  </a>
                 </div>
               </div>
             </div>
@@ -376,9 +379,50 @@
 	<script type="text/javascript" src="js/charts/colors.js"></script>
 	<script type="text/javascript" src="js/charts/piechart.js"></script>
 	<script type="text/javascript">
-		$(function () {
-			$('[data-toggle="popover"]').popover()
-		})
+		<?php
+			if ($user_type == "admin" && $target_user_type == 1) {
+		?>
+			$('#newTraineePrompt').click(function() {
+				_openNewTraineeTypePopup();
+			});
+			
+			function _openNewTraineeTypePopup() {
+				var confirmPopupHTML = '<div id="whiteout"></div>\
+								<div id="warning-popup" class="thumbnail warning-popup">\
+									<div class="caption">\
+										<h4>Trainee to Create</h4>\
+										<p>Create a new trainee account for this trainer or link this trainer with an existing trainee.</p>\
+										<p>';
+		
+				confirmPopupHTML += '<a id="link-new" href="#" class="btn btn-primary" role="button">New Trainee</a><br />';
+				confirmPopupHTML += '<a id="link-existing" href="#" class="btn btn-primary" role="button">Link Existing Trainee</a><br />';
+				confirmPopupHTML += '<a id="link-cancel" href="#" class="btn btn-default" role="button">Cancel</a>\
+								</p>\
+							</div>\
+						</div>';
+		
+				if ($('#whiteout').length <= 0) {
+					$('body').append(confirmPopupHTML);
+				}
+			
+				$('#link-new').click(function() {
+					$('#whiteout').remove();
+					$('#warning-popup').remove();
+					window.location.href = "register?p=<?php echo $id_user; ?>";
+				});
+				$('#link-existing').click(function() {
+					$('#whiteout').remove();
+					$('#warning-popup').remove();
+					window.location.href = "register_existing_trainee?p=<?php echo $id_user; ?>";
+				});
+				$('#link-cancel').click(function() {
+					$('#whiteout').remove();
+					$('#warning-popup').remove();
+				});
+			}
+		<?php
+			}
+		?>
 	
 		google.load("visualization", "1", {packages:["corechart"]});
 		google.setOnLoadCallback(drawChart);

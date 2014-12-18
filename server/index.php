@@ -67,6 +67,12 @@
 
   <body>
 
+	<div id="contextMenu" class="dropdown clearfix">
+		<ul class="dropdown-menu" role="menu" aria-labelledby="dropdownMenu" style="display:block;position:static;margin-bottom:5px;">
+			<li><a id="delete-trainee" tabindex="-1" href="#">Delete Trainee</a></li>
+		</ul>
+	</div>
+	
     <div id="wrapper">
 
       <!-- Sidebar -->
@@ -92,9 +98,9 @@
                 <div class="list-group">
 				  <?php
 						foreach ($children as $trainee) {
-							$trainee_name = $users[$trainee];
-							echo '<a href="user?id=' . $trainee . '" class="list-group-item">
-									<i class="fa fa-user"></i>&nbsp;&nbsp;' . userLookup($mysqli, $trainee) . '
+							$traineeName = userLookup($mysqli, $trainee);
+							echo '<a href="user?id=' . $trainee . '" class="list-group-item trainee-item" data-id="' . $trainee . '" data-name="' . $traineeName . '">
+									<i class="fa fa-user"></i>&nbsp;&nbsp;' . $traineeName . '
 								  </a>';
 						}
 				  ?>
@@ -122,17 +128,17 @@
 								$message_preview_counter++;
 							}
 							if ($message["msg_type"] == 0) {
-								echo '<a href="#" class="list-group-item">
+								echo '<a href="inbox?msg=' . $message['id'] . '" class="list-group-item">
 										<span class="badge">' . $message["msg_date"] . '</span>
 										<i class="fa fa-comment"></i> ' . $users[$message["id_from"]] . ' sent you a message
 									  </a>';
 							} else if ($message["msg_type"] == 1) {
-								echo '<a href="#" class="list-group-item">
+								echo '<a href="inbox?msg=' . $message['id'] . '" class="list-group-item">
 										<span class="badge">' . $message["msg_date"] . '</span>
 										<i class="fa fa-volume-up"></i> ' .$users[$message["id_from"]] . ' sent you a message
 									  </a>';
 							} else {
-								echo '<a href="#" class="list-group-item">
+								echo '<a href="inbox?msg=' . $message['id'] . '" class="list-group-item">
 										<span class="badge">' . $message["msg_date"] . '</span>
 										<i class="fa fa-film"></i> ' . $users[$message["id_from"]] . ' sent you a message
 									  </a>';
@@ -159,6 +165,59 @@
     <!-- Page Specific Plugins -->
     <script src="js/tablesorter/jquery.tablesorter.js"></script>
     <script src="js/tablesorter/tables.js"></script>
+
+	<script>
+		var clickedTraineeName;
+		var clickedTraineeID;
+		
+		$("body").on("contextmenu", ".trainee-item", function (e) {
+			clickedTraineeID = $(this).data('id');
+			clickedTraineeName = $(this).data('name');
+			$('#contextMenu').css({
+				display: "block",
+				left: e.pageX,
+				top: e.pageY
+			});
+			return false;
+		});
+		
+		$('#delete-trainee').click(function() {
+			_openWarningPopup(clickedTraineeID, clickedTraineeName);
+		});
+		
+		$('body').click(function () {
+			$('#contextMenu').hide();
+		});
+		
+		function _openWarningPopup(traineeID, traineeName) {
+			var confirmPopupHTML = '<div id="whiteout"></div>\
+							<div id="warning-popup" class="thumbnail warning-popup">\
+								<div class="caption">\
+									<h4>Delete ' + traineeName + '?</h4><br />\
+									<p><strong>Warning!</strong> This will delete any data associated with this account</p>\
+									<p>';
+		
+			confirmPopupHTML += '<a id="delete-confirm" href="#" class="btn btn-primary" role="button">Delete ' + traineeName + '</a><br />';
+			confirmPopupHTML += '<a id="delete-cancel" href="#" class="btn btn-default" role="button">Cancel</a>\
+							</p>\
+						</div>\
+					</div>';
+		
+			if ($('#whiteout').length <= 0) {
+				$('body').append(confirmPopupHTML);
+			}
+			
+			$('#delete-confirm').click(function() {
+				$('#whiteout').remove();
+				$('#warning-popup').remove();
+				window.location.href = 'delete_trainee.php?id=' + traineeID;
+			});
+			$('#delete-cancel').click(function() {
+				$('#whiteout').remove();
+				$('#warning-popup').remove();
+			});
+		}
+	</script>
 
   </body>
 </html>

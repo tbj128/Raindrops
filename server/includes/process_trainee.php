@@ -26,6 +26,7 @@ if (isset($_POST['username'], $_POST['p'])) {
     // Sanitize and validate the data passed in
 	$username = mysqli_real_escape_string($mysqli, $_POST['username']);
 	$password =  mysqli_real_escape_string($mysqli, $_POST['p']);
+	$parent = mysqli_real_escape_string($mysqli, $_POST['parent']);
 	$type = 2; // Trainee type
 
     if (strlen($password) != 128) {
@@ -101,7 +102,7 @@ if (isset($_POST['username'], $_POST['p'])) {
 		
         if ($insert_stmt = $mysqli->prepare("INSERT INTO raindrops_relations (id_parent, id_child) VALUES (?, ?)")) {
 		
-            $insert_stmt->bind_param('ii', $user_id, $id_child);
+            $insert_stmt->bind_param('ii', $parent, $id_child);
             // Execute the prepared query.
             if (! $insert_stmt->execute()) {
 				header('Location: ../register_trainer?err=1');
