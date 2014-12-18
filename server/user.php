@@ -33,8 +33,8 @@
 		$id_user = $_GET['id'];
 		$name_user = userLookup($mysqli, $id_user);
 	}
-	
 	$user_type = userType($mysqli, $user_id);
+	$target_user_type = userType($mysqli, $id_user);
 	if ($user_type != 2) {
 		$children = findTrainees($mysqli, $user_id);
 		// Security check: Is user allowed to access this trainee's data?
@@ -89,6 +89,40 @@
 	  ?>
 
       <div id="page-wrapper">
+
+		<?php
+			// Display trainer info when the admin is viewing trainers
+			if ($user_type == "admin" && $target_user_type == 1) {
+				$target_children = findTrainees($mysqli, $id_user);
+				
+		?>
+        <div class="row">
+          <div class="col-lg-12">
+            <h1><?php echo $name_user; ?>  (trainer)</h1>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-lg-6">
+            <div class="panel panel-primary">
+              <div class="panel-heading">
+                <h3 class="panel-title"><?php echo $name_user; ?>'s trainees</h3>
+              </div>
+              <div class="panel-body">
+                <div class="list-group">
+				  <?php
+						foreach ($target_children as $trainee) {
+							echo '<a href="#" class="list-group-item" data-container="body" data-toggle="popover" data-placement="right" data-content="Login as ' . $name_user . ' to see this user\'s info.">
+									<i class="fa fa-user"></i>&nbsp;&nbsp;' . userLookup($mysqli, $trainee) . '
+								  </a>';
+						}
+				  ?>
+                </div>
+              </div>
+            </div>
+          </div>
+		<?php
+			} else {
+		?>
 
         <div class="row">
           <div class="col-lg-12">
@@ -321,6 +355,10 @@
           </div>
         </div><!-- /.row -->
 
+		<?php
+			} // End user check
+		?>
+
       </div><!-- /#page-wrapper -->
 
     </div><!-- /#wrapper -->
@@ -338,6 +376,10 @@
 	<script type="text/javascript" src="js/charts/colors.js"></script>
 	<script type="text/javascript" src="js/charts/piechart.js"></script>
 	<script type="text/javascript">
+		$(function () {
+			$('[data-toggle="popover"]').popover()
+		})
+	
 		google.load("visualization", "1", {packages:["corechart"]});
 		google.setOnLoadCallback(drawChart);
 		function drawChart() {			
