@@ -134,17 +134,17 @@
 								$message_preview_counter++;
 							}
 							if ($message["msg_type"] == 0) {
-								echo '<a href="#" class="list-group-item">
+								echo '<a href="inbox?msg=' . $message['id'] . '" class="list-group-item">
 										<span class="badge">' . $message["msg_date"] . '</span>
 										<i class="fa fa-comment"></i> ' . userLookup($mysqli, $message["id_from"]) . ' sent you a message
 									  </a>';
 							} else if ($message["msg_type"] == 1) {
-								echo '<a href="#" class="list-group-item">
+								echo '<a href="inbox?msg=' . $message['id'] . '" class="list-group-item">
 										<span class="badge">' . $message["msg_date"] . '</span>
 										<i class="fa fa-volume-up"></i> ' . userLookup($mysqli, $message["id_from"]) . ' sent you a message
 									  </a>';
 							} else {
-								echo '<a href="#" class="list-group-item">
+								echo '<a href="inbox?msg=' . $message['id'] . '" class="list-group-item">
 										<span class="badge">' . $message["msg_date"] . '</span>
 										<i class="fa fa-film"></i> ' . userLookup($mysqli, $message["id_from"]) . ' sent you a message
 									  </a>';
