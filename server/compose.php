@@ -50,6 +50,9 @@
 
     <!-- Bootstrap core CSS -->
     <link href="css/bootstrap.css" rel="stylesheet">
+    
+    <!-- Bootstrap Tagsinput CSS -->
+    <link href="css/bootstrap.tagsinput.css" rel="stylesheet">
 
     <!-- Add custom CSS here -->
     <link href="css/sb-admin.css" rel="stylesheet">
@@ -76,7 +79,7 @@
 					</div>
 					<div class="form-group input-group">
 						<span class="input-group-addon">To</span>
-						<input id="msg_id_to" class="form-control" name="msg_id_to" placeholder="To" >
+						<input id="msg_id_to" class="form-control" name="msg_id_to" placeholder="" >
 					</div>
 					<div class="form-group">
 						<input class="form-control" name="msg_title" placeholder="Subject" >
@@ -200,6 +203,34 @@
 				send();
 			}
 		});
+		
+		_initTypeAhead();
+		
+		function _initTypeAhead() {
+			$('#msg_id_to').tagsinput({
+				freeInput: false,
+				typeahead: {
+					source: [
+					<?php 
+						foreach ($users as $user) {
+							echo "'" . $user . "',";
+						}
+					?> ]
+				}
+			});
+ 
+			$('#msg_id_to').on('itemAdded', function(event) {
+				
+			});
+		
+			$('#msg_id_to').on('itemRemoved', function(event) {
+				
+			});
+			
+			$('.bootstrap-tagsinput').addClass("form-control");
+			
+		}
+	
 		
 	</script>
 	

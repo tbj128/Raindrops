@@ -584,7 +584,7 @@ function getInbox($mysqli, $user_id) {
 					"msg_content" => $msg_content,
 					"msg_link" => $msg_link,
 					"msg_type" => $msg_type,
-					"msg_date" => $msg_date,
+					"msg_date" => formatMessageDate($msg_date),
 					"msg_read" => $msg_read
 				);
 				$messages[] = $message;
@@ -616,7 +616,7 @@ function getUnreadMessages($mysqli, $user_id) {
 					"msg_content" => $msg_content,
 					"msg_link" => $msg_link,
 					"msg_type" => $msg_type,
-					"msg_date" => $msg_date,
+					"msg_date" => formatMessageDate($msg_date),
 					"msg_read" => $msg_read
 				);
 				$messages[] = $message;
@@ -1018,6 +1018,19 @@ function getPointLeaders($mysqli) {
 function formatDate($date) {
 	$dateTime = strtotime($date);
 	return date("M j, Y g:i a", $dateTime);
+}
+
+function formatMessageDate($date) {
+	$now = strtotime("now");
+	$dateTime = strtotime($date);
+	
+	$nowDay = date("Y-m-d", $now);
+	$day = date("Y-m-d", $dateTime);
+	if ($nowDay != $day) {
+		return date("M d", $dateTime);
+	} else {
+		return date("g:i a", $dateTime);
+	}
 }
 
 ?>

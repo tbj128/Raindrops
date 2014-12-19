@@ -53,12 +53,12 @@
 				// Normal written message
 				if ($is_read) {
 					$list_messages .= '<a href="outbox?msg=' . $message['id'] . '" class="list-group-item" style="background-color:#F3F3F3;">
-						<span class="badge">' . formatDate($message["msg_date"]) . '</span>';
+						<span class="pull-right">' . formatMessageDate($message["msg_date"]) . '</span>';
 					$list_messages .= '<i class="fa fa-comment"></i>&nbsp;&nbsp;' . $users[$message["id_to"]] . '&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;' . $message['msg_title'] . ' - <span style="color:#999;">' . substr($message['msg_content'], 0, 30) . '</span>
 					  </a>';
 				} else {
 					$list_messages .= '<a href="outbox?msg=' . $message['id'] . '" class="list-group-item">
-						<span class="badge">' . formatDate($message["msg_date"]) . '</span>';
+						<span class="pull-right">' . formatMessageDate($message["msg_date"]) . '</span>';
 					$list_messages .= '<i class="fa fa-comment"></i>&nbsp;&nbsp;<strong>' . $users[$message["id_to"]] . '&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;' . $message['msg_title'] . ' - <span style="color:#999;">' . substr($message['msg_content'], 0, 30) . '</span></strong>
 					  </a>';
 				}
@@ -66,12 +66,12 @@
 				// Audio message
 				if ($is_read) {
 					$list_messages .= '<a href="outbox?msg=' . $message['id'] . '" class="list-group-item" style="background-color:#F3F3F3;">
-						<span class="badge">' . formatDate($message["msg_date"]) . '</span>';
+						<span class="pull-right">' . formatMessageDate($message["msg_date"]) . '</span>';
 					$list_messages .= '<i class="fa fa-volume-up"></i>&nbsp;&nbsp;' . $users[$message["id_to"]] . '&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;' . $message['msg_title'] . ' - <span style="color:#999;">' . substr($message['msg_content'], 0, 30) . '</span>
 					  </a>';
 				} else {
 					$list_messages .= '<a href="outbox?msg=' . $message['id'] . '" class="list-group-item">
-						<span class="badge">' . formatDate($message["msg_date"]) . '</span>';
+						<span class="pull-right">' . formatMessageDate($message["msg_date"]) . '</span>';
 					$list_messages .= '<i class="fa fa-volume-up"></i>&nbsp;&nbsp;<strong>' . $users[$message["id_to"]] . '&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;' . $message['msg_title'] . ' - <span style="color:#999;">' . substr($message['msg_content'], 0, 30) . '</span></strong>
 					  </a>';
 				}
@@ -79,12 +79,12 @@
 				// Video message
 				if ($is_read) {
 					$list_messages .= '<a href="outbox?msg=' . $message['id'] . '" class="list-group-item" style="background-color:#F3F3F3;">
-						<span class="badge">' . formatDate($message["msg_date"]) . '</span>';
+						<span class="pull-right">' . formatMessageDate($message["msg_date"]) . '</span>';
 					$list_messages .= '<i class="fa fa-film"></i>&nbsp;&nbsp;' . $users[$message["id_to"]] . '&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;' . $message['msg_title'] . ' - <span style="color:#999;">' . substr($message['msg_content'], 0, 30) . '</span>
 					  </a>';
 				} else {
 					$list_messages .= '<a href="outbox?msg=' . $message['id'] . '" class="list-group-item">
-						<span class="badge">' . formatDate($message["msg_date"]) . '</span>';
+						<span class="pull-right">' . formatMessageDate($message["msg_date"]) . '</span>';
 					$list_messages .= '<i class="fa fa-film"></i>&nbsp;&nbsp;<strong>' . $users[$message["id_to"]] . '&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;' . $message['msg_title'] . ' - <span style="color:#999;">' . substr($message['msg_content'], 0, 30) . '</span></strong>
 					  </a>';
 				}
@@ -137,7 +137,7 @@
 								$type = "video/mp4";
 							}
 							
-							echo '<h1><span style="float:left;">' . $message['msg_title'] . '</span><small class="pull-right small-date">' . formatDate($message["msg_date"]) . '</small></h1><div style="clear:both;"></div>';
+							echo '<h1><span style="float:left;">' . $message['msg_title'] . '</span><small class="pull-right small-date">' . formatMessageDate($message["msg_date"]) . '</small></h1><div style="clear:both;"></div>';
 							echo '<h2 style="margin-top:0px;"><small>to ' . $users[$message['id_to']] . '</small></h2><hr />';
 							echo '<p>' . $message['msg_content'] . '</p>';
 

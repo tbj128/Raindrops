@@ -33,6 +33,7 @@
 	$page = 'Dashboard';
 	$num_unread = getNumberUnreadMessages($mysqli, $user_id);
 	$children = findTrainees($mysqli, $user_id);
+	$all_trainees = findAllTrainees($mysqli);
 	$users = allUserLookup($mysqli);
 	$welcome = false;
 	if (isset($_GET['welcome'])) {
@@ -92,7 +93,7 @@
         </div><!-- /.row -->
 
         <div class="row">
-		  <div class="col-lg-6">
+		  <div class="col-lg-4">
             <div class="panel panel-primary">
               <div class="panel-heading">
                 <h3 class="panel-title"><i class="fa fa-user"></i>&nbsp;&nbsp;All Trainers</h3>
@@ -117,7 +118,32 @@
               </div>
             </div>
           </div>
-          <div class="col-lg-6">
+          <div class="col-lg-4">
+            <div class="panel panel-primary">
+              <div class="panel-heading">
+                <h3 class="panel-title"><i class="fa fa-user"></i>&nbsp;&nbsp;All Trainees</h3>
+              </div>
+              <div class="panel-body">
+				<div class="alert alert-info">
+				  <strong>Note </strong> Trainees can monitor their progress on the web or on the app.
+				</div>
+                <div class="list-group">
+				  <?php
+						foreach ($all_trainees as $trainee) {
+							$traineeName = userLookup($mysqli, $trainee);
+							echo '<a href="user?id=' . $trainee . '" class="list-group-item trainer-item" data-id="' . $trainee . '" data-name="' . $traineeName . '">
+									<i class="fa fa-user"></i>&nbsp;&nbsp;' . $traineeName . '
+								  </a>';
+						}
+				  ?>
+				  <a href="register_trainee" class="list-group-item">
+					<i class="fa fa-plus"></i>&nbsp;&nbsp;New Trainee
+				  </a>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="col-lg-4">
             <div class="panel panel-primary">
               <div class="panel-heading">
                 <h3 class="panel-title"><i class="fa fa-envelope-o"></i>  Recent Messages</h3>
@@ -135,18 +161,18 @@
 							}
 							if ($message["msg_type"] == 0) {
 								echo '<a href="inbox?msg=' . $message['id'] . '" class="list-group-item">
-										<span class="badge">' . $message["msg_date"] . '</span>
-										<i class="fa fa-comment"></i> ' . userLookup($mysqli, $message["id_from"]) . ' sent you a message
+										<span class="pull-right">' . $message["msg_date"] . '</span>
+										<i class="fa fa-comment"></i> ' . userLookup($mysqli, $message["id_from"]) . ' 
 									  </a>';
 							} else if ($message["msg_type"] == 1) {
 								echo '<a href="inbox?msg=' . $message['id'] . '" class="list-group-item">
-										<span class="badge">' . $message["msg_date"] . '</span>
-										<i class="fa fa-volume-up"></i> ' . userLookup($mysqli, $message["id_from"]) . ' sent you a message
+										<span class="pull-right">' . $message["msg_date"] . '</span>
+										<i class="fa fa-volume-up"></i> ' . userLookup($mysqli, $message["id_from"]) . ' 
 									  </a>';
 							} else {
 								echo '<a href="inbox?msg=' . $message['id'] . '" class="list-group-item">
-										<span class="badge">' . $message["msg_date"] . '</span>
-										<i class="fa fa-film"></i> ' . userLookup($mysqli, $message["id_from"]) . ' sent you a message
+										<span class="pull-right">' . $message["msg_date"] . '</span>
+										<i class="fa fa-film"></i> ' . userLookup($mysqli, $message["id_from"]) . ' 
 									  </a>';
 							}
 						}

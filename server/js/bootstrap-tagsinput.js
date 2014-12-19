@@ -1,37 +1,619 @@
-<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><title>Source of bootstrap-tagsinput.js - ES_plugin - Stash</title><script>
-window.WRM=window.WRM||{};window.WRM._unparsedData=window.WRM._unparsedData||{};
-WRM._unparsedData["com.atlassian.plugins.atlassian-plugins-webresource-plugin:context-path.context-path"]="\"\\/stash\"";
-WRM._unparsedData["com.atlassian.stash.config-wrm-data:attachment.upload.max.size.data"]="{\"value\":\"10485760\",\"key\":\"attachment.upload.max.size\",\"type\":\"NUMBER\"}";
-WRM._unparsedData["com.atlassian.stash.config-wrm-data:display.max.source.lines.data"]="{\"value\":\"20000\",\"key\":\"display.max.source.lines\",\"type\":\"NUMBER\"}";
-WRM._unparsedData["com.atlassian.stash.config-wrm-data:page.max.source.lines.data"]="{\"value\":\"5000\",\"key\":\"page.max.source.lines\",\"type\":\"NUMBER\"}";
-WRM._unparsedData["com.atlassian.stash.feature-wrm-data:attachments.data"]="true";
-WRM._unparsedData["com.atlassian.stash.feature-wrm-data:source.codemirror.data"]="true";
-WRM._unparsedData["com.atlassian.stash.stash-web-plugin:legacy-source-view.syntax-highlighters"]="{\"text/x-sh\":{\"e\":[\"makefile\",\"Makefile\"],\"x\":[\"sh\",\"bash\",\"zsh\"]},\"text/velocity\":{\"e\":[\"vm\"]},\"text/x-ruby\":{\"x\":[\"ruby\"]},\"text/x-erlang\":{\"x\":[\"escript\"]},\"text/javascript\":{\"x\":[\"node\"]},\"text/x-perl\":{\"x\":[\"perl\"]},\"text/x-python\":{\"x\":[\"python\"]}}";
-WRM._unparsedData["com.atlassian.stash.stash-web-plugin:source-view.syntax-highlighters"]="{\"text/x-sh\":{\"e\":[\"makefile\",\"Makefile\"],\"x\":[\"sh\",\"bash\",\"zsh\"]},\"text/velocity\":{\"e\":[\"vm\"]},\"text/x-ruby\":{\"x\":[\"ruby\"]},\"text/x-erlang\":{\"x\":[\"escript\"]},\"text/javascript\":{\"x\":[\"node\"]},\"text/x-perl\":{\"x\":[\"perl\"]},\"text/x-python\":{\"x\":[\"python\"]}}";
-</script>
-<link type="text/css" rel="stylesheet" href="/stash/s/dc07fc49efeacb8c898de2cfa45f0a74-CDN/en_US/f3c0ab8/1/1/_/download/superbatch/css/batch.css" media="all">
-<!--[if lte IE 9]>
-<link type="text/css" rel="stylesheet" href="/stash/s/df8ef6e1e3cb812a5c9959a841e9d399-CDN/en_US/f3c0ab8/1/1/_/download/superbatch/css/batch.css?conditionalComment=lte+IE+9" media="all">
-<![endif]-->
-<link type="text/css" rel="stylesheet" href="/stash/s/be070117b4625bfb8466c095ed4a1261-CDN/en_US/f3c0ab8/1/32cd2ab20e71e14a059fb94a7c007ef6/_/download/contextbatch/css/stash.page.repository.fileContent,stash.layout.files,stash.layout.branch,stash.layout.repository,atl.general,stash.feature.files.fileHandlers,stash.layout.base,stash.layout.entity/batch.css?supportedApplication=true" media="all">
-<!--[if lte IE 9]>
-<link type="text/css" rel="stylesheet" href="/stash/s/e4e12a2e084577790394c2b85d5702f0-CDN/en_US/f3c0ab8/1/32cd2ab20e71e14a059fb94a7c007ef6/_/download/contextbatch/css/stash.page.repository.fileContent,stash.layout.files,stash.layout.branch,stash.layout.repository,atl.general,stash.feature.files.fileHandlers,stash.layout.base,stash.layout.entity/batch.css?conditionalComment=lte+IE+9" media="all">
-<![endif]-->
-<script type="text/javascript" src="/stash/s/7965d0b73796bfbecb029b5b53ed42f9-CDN/en_US/f3c0ab8/1/1/_/download/superbatch/js/batch.js?locale=en-US" ></script>
-<script type="text/javascript" src="/stash/s/a9d858ef3aa406c39909575ee4e1103e-T/en_US/f3c0ab8/1/32cd2ab20e71e14a059fb94a7c007ef6/_/download/contextbatch/js/stash.page.repository.fileContent,stash.layout.files,stash.layout.branch,stash.layout.repository,atl.general,stash.feature.files.fileHandlers,stash.layout.base,stash.layout.entity/batch.js?locale=en-US&amp;supportedApplication=true" ></script>
-<meta name="application-name" content="Stash"><link rel="shortcut icon" type="image/x-icon" href="/stash/s/en_US/f3c0ab8/1/1.0/_/download/resources/com.atlassian.stash.stash-web-plugin:favicon/favicon.ico" /></head><body class="aui-page-sidebar stash-theme"><div id="page"><!-- start #header --><header id="header" role="banner"><section class="notifications"></section><nav class="aui-header aui-dropdown2-trigger-group" role="navigation"><div class="aui-header-inner"><div class="aui-header-primary"><a class="  app-switcher-trigger aui-dropdown2-trigger" aria-owns="app-switcher" aria-controls="app-switcher" aria-haspopup="true"  data-aui-trigger ><span class="aui-icon aui-icon-small aui-iconfont-appswitcher">Linked Applications</span></a><div id="app-switcher" class="aui-dropdown2 aui-style-default"><div class="app-switcher-loading">Loading&hellip;</div></div><script>
-            (function (NL) {
-                var initialise = function () {
-                    // For some milestones of AUI, the atlassian soy namespace was renamed to aui. Handle that here by ensuring that window.atlassian is defined.
-                    window.atlassian = window.atlassian || window.aui;
-                    new NL.AppSwitcher({
-                        dropdownContents: '#app-switcher'
-                    });
-                };
-                if (NL.AppSwitcher) {
-                    initialise();
-                } else {
-                    NL.onInit = initialise;
-                }
-            }(window.NL = (window.NL || {})));
-            window.NL.isUserAdmin = false</script><h1 id="logo" class="aui-header-logo aui-header-logo-stash"><a href="https://svn.bcgsc.ca/stash" class="stash"><span class="aui-header-logo-device">Stash</span></a></h1><ul class="aui-nav"><li><a href="/stash/projects" class="projects-link">Projects</a></li><li class="selected"><a class="aui-dropdown2-trigger recent-repositories" aria-owns="com.atlassian.stash.stash-server-web-fragments-repositories-menu" aria-haspopup="true" id="repositories-menu-trigger"   href="#">Repositories<span class="icon aui-icon-dropdown"></span></a><div style="display: none" id="com.atlassian.stash.stash-server-web-fragments-repositories-menu" class="aui-dropdown2 aui-style-default"><div class="aui-dropdown2-section recent-repositories-section"><strong>Recently viewed</strong><ul class="aui-list-truncate"></ul></div><div class="aui-dropdown2-section public-repo-list-link-section"><ul class="aui-list-truncate"><li><a href="/stash/repos?visibility=public" title="View all publicly accessible repositories in Stash">View all public repositories</a></li></ul></div></div></li></ul></div><div class="aui-header-secondary"><ul class="aui-nav"><li><form class="aui-quicksearch"><div class="repository-search-trigger"><label class="assistive" for="repository-search">Find a repository...</label><input id="repository-search" type="text" autocomplete="off" placeholder="Find a repository..."/><div class="spinner"></div></div></form></li><li><a class="aui-dropdown2-trigger help-link" aria-owns="com.atlassian.stash.stash-server-web-fragments-help-menu" aria-haspopup="true"    href="#"><span class="aui-icon aui-icon-small aui-iconfont-help">Help</span><span class="icon aui-icon-dropdown"></span></a><div style="display: none" id="com.atlassian.stash.stash-server-web-fragments-help-menu" class="aui-dropdown2 aui-style-default"><div class="aui-dropdown2-section help-items-section"><ul class="aui-list-truncate"><li><a href="http://docs.atlassian.com/stash/docs-035/Stash+Documentation+Home" title="Go to the online documentation for Stash">Online help</a></li><li><a href="https://www.atlassian.com/git?utm_source=stash&amp;utm_medium=in-app-help&amp;utm_campaign=learn-git" title="Learn about Git commands &amp; workflows">Learn Git</a></li><li><a href="/stash/getting-started" class="getting-started-page-link" title="Overview of Stash features">Welcome to Stash</a></li><li><a href="/stash/#" class="keyboard-shortcut-link" title="Discover keyboard shortcuts in Stash">Keyboard shortcuts</a></li></ul></div></div></li><li><a href="#inbox" id="inbox-pull-requests" title="View your unapproved pull requests">Inbox</a></li><li class="user-dropdown"><a class="aui-dropdown2-trigger user-dropdown-trigger" aria-owns="user-dropdown-menu" aria-haspopup="true"  title="Logged in as Tom Jin (tjin)" data-container=".aui-header-secondary" href="#"><span id="current-user" class="aui-avatar aui-avatar-small" data-avatarurl-small="https://secure.gravatar.com/avatar/2837af10e6f07eca131df2abc7947b23.jpg?s=48&amp;d=mm" data-username="tjin" data-emailaddress="tjin@bcgsc.ca"><span class="aui-avatar-inner"><img src="https://secure.gravatar.com/avatar/2837af10e6f07eca131df2abc7947b23.jpg?s=48&amp;d=mm" alt="Logged in as Tom Jin (tjin)" /></span></span></a><div style="display: none" id="user-dropdown-menu" class="aui-dropdown2 aui-style-default"><div class="aui-dropdown2-section user-settings-section"><ul class="aui-list-truncate"><li><a href="/stash/profile">View profile</a></li><li><a href="/stash/account">Manage account</a></li><li><a href="/stash/plugins/servlet/upm/requests?source=header_user" id="upm-requests-link">Atlassian Marketplace</a></li></ul></div><div class="aui-dropdown2-section user-logout-section"><ul class="aui-list-truncate"><li><a href="/stash/j_stash_security_logout" class="logout-link">Log out</a></li></ul></div></div></li></ul></div></div> <!-- End .aui-header-inner --></nav> <!-- End .aui-header --></header><!-- End #header --><!-- Start #content --><section id="content" role="main" data-timezone="480"  data-repoName="ES_plugin" data-repoSlug="es_plugin" data-projectName="Elastic Search Shah_Lab" data-projectKey="ES"><section class="notifications"></section><div class="aui-sidebar " ><div class="aui-sidebar-wrapper"><div class="aui-sidebar-body"><script>require("widget/sidebar").preload();</script><header class="aui-page-header"><div class="aui-page-header-inner"><div class="aui-page-header-image"><a href="/stash/projects/ES"><span class="aui-avatar aui-avatar-large aui-avatar-project" data-tooltip="Elastic Search Shah_Lab / ES_plugin"><span class="aui-avatar-inner"><img src="/stash/projects/ES/avatar.png?s=96" alt="Elastic Search Shah_Lab" /></span></span></a></div><!-- .aui-page-header-image --><div class="aui-page-header-main entity-item"><ol class="aui-nav aui-nav-breadcrumbs"><li><a href="/stash/projects/ES" title="Elastic Search Shah_Lab">Elastic Search Shah_Lab</a></li></ol><h1><span class="entity-name" title="ES_plugin">ES_plugin</span></h1><div></div></div><!-- .aui-page-header-main --></div><!-- .aui-page-header-inner --></header><!-- .aui-page-header --><nav class="aui-navgroup aui-navgroup-vertical" role="navigation"><div class="aui-navgroup-inner"><div class="aui-sidebar-group aui-sidebar-group-actions"><div class="aui-nav-heading"><strong>Actions</strong></div><ul class="aui-nav"><li class=" clone-repo"><a href="https://tjin@svn.bcgsc.ca/stash/scm/es/es_plugin.git" id="clone-repo-button" class="aui-nav-item" title="Clone this repository"><span class="aui-icon icon-clone"></span><span class="aui-nav-item-label">Clone</span></a></li><li class=" create-branch"><a href="/stash/plugins/servlet/create-branch"  class="aui-nav-item"><span class="aui-icon icon-create-branch"></span><span class="aui-nav-item-label">Create branch</span></a></li><li class=" create-pull-request"><a href="/stash/projects/ES/repos/es_plugin/pull-requests?create"  class="aui-nav-item" title="Create a new pull request"><span class="aui-icon icon-create-pull-request"></span><span class="aui-nav-item-label">Create pull request</span></a></li><li class=" fork-repo"><a href="/stash/projects/ES/repos/es_plugin?fork"  class="aui-nav-item" title="Fork this repository"><span class="aui-icon icon-fork"></span><span class="aui-nav-item-label">Fork</span></a></li></ul></div><div class="hidden"><div id="clone-repo-dialog-content"><div class="clone-url"><div class="aui-buttons"><button id="http-clone-url" class="aui-button repository-protocol"  data-clone-url="https://tjin@svn.bcgsc.ca/stash/scm/es/es_plugin.git" data-module-key="http-clone-url" autocomplete="off" aria-disabled="true" disabled="disabled" >HTTP</button><input type="text" class="text quick-copy-text stash-text" readonly="readonly" spellcheck="false" value=""/></div><p><a href="https://www.atlassian.com/git/tutorial/git-basics#!clone" target="_blank">Learn more about cloning repositories</a></p></div><div class="sourcetree-panel"><a id="sourcetree-clone-button" class="aui-button aui-button-primary sourcetree-button"  href="sourcetree://cloneRepo/https://tjin@svn.bcgsc.ca/stash/scm/es/es_plugin.git" autocomplete="off" tabindex="0">Clone in SourceTree</a><p><a href="http://www.sourcetreeapp.com" target="_blank">Atlassian SourceTree</a> is the free Git and Mercurial client for Windows or Mac.</p></div></div></div><div class="aui-sidebar-group aui-sidebar-group-tier-one"><div class="aui-nav-heading"><strong>Navigation</strong></div><ul class="aui-nav"><li class="aui-nav-selected"><a href="/stash/projects/ES/repos/es_plugin/browse" id="repository-nav-files" class="aui-nav-item"><span class="aui-icon icon-source"></span><span class="aui-nav-item-label">Source</span></a></li><li class=" commits-nav"><a href="/stash/projects/ES/repos/es_plugin/commits" id="repository-nav-commits" class="aui-nav-item"><span class="aui-icon icon-commits"></span><span class="aui-nav-item-label">Commits</span></a></li><li><a href="/stash/projects/ES/repos/es_plugin/branches" id="repository-nav-branches" class="aui-nav-item"><span class="aui-icon icon-branches"></span><span class="aui-nav-item-label">Branches</span></a></li><li><a href="/stash/projects/ES/repos/es_plugin/pull-requests" id="repository-nav-pull-requests" class="aui-nav-item"><span class="aui-icon icon-pull-requests"></span> <span class="aui-nav-item-label">Pull requests</span></a></li></ul></div></div></nav></div><div class="aui-sidebar-footer"><a class="aui-button aui-button-subtle aui-sidebar-toggle aui-sidebar-footer-tipsy" data-tooltip="Expand sidebar ( [ )" href="#"><span class="aui-icon aui-icon-small"></span></a></div></div></div><div class="aui-page-panel content-body"><div class="aui-page-panel-inner"><section class="aui-page-panel-content"><h2 class="page-panel-content-header">Source</h2><div class="aui-toolbar2 branch-selector-toolbar" role="toolbar"><div class="aui-toolbar2-inner"><div class="aui-toolbar2-primary"><div class="aui-group"><div class="aui-item"><div class="aui-buttons"><button id="repository-layout-revision-selector" type="button" class="aui-button searchable-selector-trigger revision-reference-selector-trigger"><span class="aui-icon aui-icon-small aui-iconfont-devtools-branch">Branch</span><span class="name" title="master" data-id="refs/heads/master" data-revision-ref="{&quot;id&quot;:&quot;refs/heads/master&quot;,&quot;latestChangeset&quot;:&quot;643c9dc314fdacf7c3304831387ad91f0b0ace4e&quot;,&quot;isDefault&quot;:true,&quot;type&quot;:{&quot;id&quot;:&quot;branch&quot;,&quot;name&quot;:&quot;Branch&quot;},&quot;displayId&quot;:&quot;master&quot;}">master</span></button><button id="branch-actions" class="  aui-button aui-dropdown2-trigger-arrowless aui-dropdown2-trigger" aria-owns="branch-actions-menu" aria-controls="branch-actions-menu" aria-haspopup="true"  autocomplete="off" type="button" data-aui-trigger ><span class="aui-icon aui-icon-small aui-iconfont-more"></span><span class="icon aui-icon-dropdown"></span></button></div></div><div class="aui-item"><div class="breadcrumbs"><a href="/stash/projects/ES/repos/es_plugin/browse">ES_plugin</a><span class="sep">/</span><a href="/stash/projects/ES/repos/es_plugin/browse/_site">_site</a><span class="sep">/</span><a href="/stash/projects/ES/repos/es_plugin/browse/_site/js">js</a><span class="sep">/</span><a href="/stash/projects/ES/repos/es_plugin/browse/_site/js/plugins">plugins</a><span class="sep">/</span><span class="stub">bootstrap-tagsinput.js</span></div></div></div></div><div class="aui-toolbar2-secondary changeset-badge-container"><div class="changeset-badge-oneline"><span class="aui-avatar aui-avatar-small user-avatar" data-username="khamer"><span class="aui-avatar-inner"><img src="https://secure.gravatar.com/avatar/e7c3554875356d364fd02fea73bc5787.jpg?s=48&amp;d=mm" alt="Kelsey Hamer" /></span></span><a href="/stash/users/khamer" class="changeset-author" title="Kelsey Hamer">Kelsey Hamer</a> committed <a  class="changesetid"  href="/stash/projects/ES/repos/es_plugin/commits/8ed96d23a06aa53261887efe7fec082c5f704fc8"  >8ed96d23a06</a><time title="01 December 2014 02:47 PM" datetime="2014-12-01T14:47:12-0800">01 Dec 2014</time></div></div></div></div></section><!-- .aui-page-panel-content --></div><!-- .aui-page-panel-inner --></div><!-- .aui-page-panel --></section><!-- End #content --><!-- Start #footer --><footer id="footer" role="contentinfo"><section class="notifications"></section><section class="footer-body"><ul><li>Git repository management for enterprise teams powered by <a href="http://www.atlassian.com/software/stash/">Atlassian Stash</a></li></ul><ul><li>Atlassian Stash <span title="f3c0ab8b2b028107f8aa054ef71ba09a2d1778ce" id="product-version" data-commit-id="f3c0ab8b2b028107f8aa054ef71ba09a2d1778ce" data-system-build-number="f3c0ab8"> v3.5.0</span></li><li><a href="http://docs.atlassian.com/stash/docs-035/Stash+Documentation+Home" target="_blank">Documentation</a></li><li><a href="https://support.atlassian.com/secure/SENVerification.jspa?issuetype=1&pid=10740" target="_blank">Contact Support</a></li><li><a href="https://jira.atlassian.com/browse/STASH" target="_blank">Request a feature</a></li><li><a href="/stash/about">About</a></li><li><a href="http://www.atlassian.com/company/contact/" target="_blank">Contact Atlassian</a></li></ul><div id="footer-logo"><a href="http://www.atlassian.com/" target="_blank">Atlassian</a></div></section></footer><!-- End #footer --></div><script>(function(loader) {loader.load('stash.file-content.diff.toolbar.secondary', {});loader.load('stash.comments.actions', {});loader.load('stash.file-content.diff-view.options', {});loader.load('stash.file-content.source.toolbar.primary', {});loader.load('internal.stash.comments.extra', {});loader.load('stash.comments.info', {});loader.load('stash.branch.layout.actions.dropdown', {"com.atlassian.stash.stash-branch-utils:create-branch-action":{"serverCondition":true},"com.atlassian.stash.stash-compare-plugin:compare-branch-action":{"serverCondition":true},"com.atlassian.stash.stash-sourcetree-plugin:sourcetree-checkout-action-branch-layout":{"serverCondition":true}});loader.load('stash.layout.repository', {"com.atlassian.stash.stash-readme-plugin:readme-provider":{"extensions":["md","markdown","mdown","mkdn","mkd","txt","text",""],"extensionsRaw":["txt","text",""],"name":"README"}});loader.load('stash.file-content.diff.toolbar.primary', {});loader.load('stash.file-content.source.toolbar.secondary', {});}(_PageDataPlugin));</script><script>require('layout/base').onReady({id : 2221, active: true, name : "tjin", slug : "tjin", displayName : "Tom Jin", avatarUrl : "https:\/\/secure.gravatar.com\/avatar\/2837af10e6f07eca131df2abc7947b23.jpg?s\x3d48\x26d\x3dmm", emailAddress : "tjin@bcgsc.ca", type : "NORMAL"}, "Stash" ); require('widget/keyboard-shortcuts').onReady();</script><script>require('layout/repository').onReady({"slug":"es_plugin","id":187,"name":"ES_plugin","scmId":"git","state":"AVAILABLE","statusMessage":"Available","forkable":true,"project":{"key":"ES","id":122,"name":"Elastic Search Shah_Lab","description":"Elastic Search Visualization,  Loading,  Command Line Interface","public":false,"type":"NORMAL","link":{"url":"/projects/ES","rel":"self"},"links":{"self":[{"href":"https://svn.bcgsc.ca/stash/projects/ES"}]},"avatarUrl":"/stash/projects/ES/avatar.png?s=64"},"public":false,"link":{"url":"/projects/ES/repos/es_plugin/browse","rel":"self"},"cloneUrl":"https://tjin@svn.bcgsc.ca/stash/scm/es/es_plugin.git","links":{"clone":[{"href":"ssh://git@svn.bcgsc.ca:7999/es/es_plugin.git","name":"ssh"},{"href":"https://tjin@svn.bcgsc.ca/stash/scm/es/es_plugin.git","name":"http"}],"self":[{"href":"https://svn.bcgsc.ca/stash/projects/ES/repos/es_plugin/browse"}]}}, '#clone-repo-button', '#clone-repo-dialog-content');</script><div id="branch-actions-menu" class="aui-dropdown2 aui-style-default"></div><script>require('layout/branch').onReady('#repository-layout-revision-selector');</script><script>require('layout/files').onReady(["_site","js","plugins","bootstrap-tagsinput.js"],{"id":"refs/heads/master","latestChangeset":"643c9dc314fdacf7c3304831387ad91f0b0ace4e","isDefault":true,"type":{"id":"branch","name":"Branch"},"displayId":"master"}, '.branch-selector-toolbar .breadcrumbs',false);</script><script>require('page/source').onReady( "_site\/js\/plugins\/bootstrap-tagsinput.js",{"id":"refs/heads/master","latestChangeset":"643c9dc314fdacf7c3304831387ad91f0b0ace4e","isDefault":true,"type":{"id":"branch","name":"Branch"},"displayId":"master"},{"id":"8ed96d23a06aa53261887efe7fec082c5f704fc8","displayId":"8ed96d23a06","author":{"name":"khamer","emailAddress":"khamer@bccrc.ca","id":805,"displayName":"Kelsey Hamer","active":true,"slug":"khamer","type":"NORMAL","link":{"url":"/users/khamer","rel":"self"},"links":{"self":[{"href":"https://svn.bcgsc.ca/stash/users/khamer"}]},"avatarUrl":"http://www.gravatar.com/avatar/e7c3554875356d364fd02fea73bc5787.jpg?s=48&d=mm"},"authorTimestamp":1417474032000,"message":"added visual interface to plugin MDD-344","parents":[{"id":"cbc35373858a511e5049e962c474df3e2c4e39f8","displayId":"cbc35373858"}],"attributes":{"jira-key":["MDD-344"]}},"source", '#content .aui-page-panel-content', 'file-content',10);</script><script type="text/javascript">require('layout/base/menu/recent-repos').initMenu('repositories-menu-trigger');</script></body></html>
+(function ($) {
+  "use strict";
+
+  var defaultOptions = {
+    tagClass: function(item) {
+      return 'label label-info';
+    },
+    itemValue: function(item) {
+      return item ? item.toString() : item;
+    },
+    itemText: function(item) {
+      return this.itemValue(item);
+    },
+    freeInput: true,
+    addOnBlur: true,
+    maxTags: undefined,
+    maxChars: undefined,
+    confirmKeys: [13, 44],
+    onTagExists: function(item, $tag) {
+      $tag.hide().fadeIn();
+    },
+    trimValue: false,
+    allowDuplicates: false
+  };
+
+  /**
+   * Constructor function
+   */
+  function TagsInput(element, options) {
+    this.itemsArray = [];
+
+    this.$element = $(element);
+    this.$element.hide();
+
+    this.isSelect = (element.tagName === 'SELECT');
+    this.multiple = (this.isSelect && element.hasAttribute('multiple'));
+    this.objectItems = options && options.itemValue;
+    this.placeholderText = element.hasAttribute('placeholder') ? this.$element.attr('placeholder') : '';
+    this.inputSize = Math.max(1, this.placeholderText.length);
+
+    this.$container = $('<div class="bootstrap-tagsinput"></div>');
+    this.$input = $('<input type="text" placeholder="' + this.placeholderText + '"/>').appendTo(this.$container);
+
+    this.$element.after(this.$container);
+
+    var inputWidth = (this.inputSize < 3 ? 3 : this.inputSize) + "em";
+    this.$input.get(0).style.cssText = "width: " + inputWidth + " !important;";
+    this.build(options);
+  }
+
+  TagsInput.prototype = {
+    constructor: TagsInput,
+
+    /**
+     * Adds the given item as a new tag. Pass true to dontPushVal to prevent
+     * updating the elements val()
+     */
+    add: function(item, dontPushVal) {
+      var self = this;
+
+      if (self.options.maxTags && self.itemsArray.length >= self.options.maxTags)
+        return;
+
+      // Ignore falsey values, except false
+      if (item !== false && !item)
+        return;
+
+      // Trim value
+      if (typeof item === "string" && self.options.trimValue) {
+        item = $.trim(item);
+      }
+
+      // Throw an error when trying to add an object while the itemValue option was not set
+      if (typeof item === "object" && !self.objectItems)
+        throw("Can't add objects when itemValue option is not set");
+
+      // Ignore strings only containg whitespace
+      if (item.toString().match(/^\s*$/))
+        return;
+
+      // If SELECT but not multiple, remove current tag
+      if (self.isSelect && !self.multiple && self.itemsArray.length > 0)
+        self.remove(self.itemsArray[0]);
+
+      if (typeof item === "string" && this.$element[0].tagName === 'INPUT') {
+        var items = item.split(',');
+        if (items.length > 1) {
+          for (var i = 0; i < items.length; i++) {
+            this.add(items[i], true);
+          }
+
+          if (!dontPushVal)
+            self.pushVal();
+          return;
+        }
+      }
+
+      // raise beforeItemAdd arg
+      var beforeItemAddEvent = $.Event('beforeItemAdd', { item: item, cancel: false });
+      self.$element.trigger(beforeItemAddEvent);
+      if (beforeItemAddEvent.cancel)
+        return;
+
+      item = beforeItemAddEvent.item
+
+      var itemValue = self.options.itemValue(item),
+          itemText = self.options.itemText(item),
+          tagClass = self.options.tagClass(item);
+
+      // Ignore items allready added
+      var existing = $.grep(self.itemsArray, function(item) { return self.options.itemValue(item) === itemValue; } )[0];
+      if (existing && !self.options.allowDuplicates) {
+        // Invoke onTagExists
+        if (self.options.onTagExists) {
+          var $existingTag = $(".tag", self.$container).filter(function() { return $(this).data("item") === existing; });
+          self.options.onTagExists(item, $existingTag);
+        }
+        return;
+      }
+
+      // if length greater than limit
+      if (self.items().toString().length + item.length + 1 > self.options.maxInputLength)
+        return;
+
+      // register item in internal array and map
+      self.itemsArray.push(item);
+
+      // add a tag element
+      var $tag = $('<span class="tag ' + htmlEncode(tagClass) + '">' + htmlEncode(itemText) + '<span data-role="remove"></span></span>');
+      $tag.data('item', item);
+      self.findInputWrapper().before($tag);
+      $tag.after(' ');
+
+      // add <option /> if item represents a value not present in one of the <select />'s options
+      if (self.isSelect && !$('option[value="' + encodeURIComponent(itemValue) + '"]',self.$element)[0]) {
+        var $option = $('<option selected>' + htmlEncode(itemText) + '</option>');
+        $option.data('item', item);
+        $option.attr('value', itemValue);
+        self.$element.append($option);
+      }
+
+      if (!dontPushVal)
+        self.pushVal();
+
+      // Add class when reached maxTags
+      if (self.options.maxTags === self.itemsArray.length || self.items().toString().length === self.options.maxInputLength)
+        self.$container.addClass('bootstrap-tagsinput-max');
+
+      self.$element.trigger($.Event('itemAdded', { item: item }));
+    },
+
+    /**
+     * Removes the given item. Pass true to dontPushVal to prevent updating the
+     * elements val()
+     */
+    remove: function(item, dontPushVal) {
+      var self = this;
+
+      if (self.objectItems) {
+        if (typeof item === "object")
+          item = $.grep(self.itemsArray, function(other) { return self.options.itemValue(other) ==  self.options.itemValue(item); } );
+        else
+          item = $.grep(self.itemsArray, function(other) { return self.options.itemValue(other) ==  item; } );
+
+        item = item[item.length-1];
+      }
+
+      if (item) {
+        var beforeItemRemoveEvent = $.Event('beforeItemRemove', { item: item, cancel: false });
+        self.$element.trigger(beforeItemRemoveEvent);
+        if (beforeItemRemoveEvent.cancel)
+          return;
+
+        $('.tag', self.$container).filter(function() { return $(this).data('item') === item; }).remove();
+        $('option', self.$element).filter(function() { return $(this).data('item') === item; }).remove();
+        if($.inArray(item, self.itemsArray) !== -1)
+          self.itemsArray.splice($.inArray(item, self.itemsArray), 1);
+      }
+
+      if (!dontPushVal)
+        self.pushVal();
+
+      // Remove class when reached maxTags
+      if (self.options.maxTags > self.itemsArray.length)
+        self.$container.removeClass('bootstrap-tagsinput-max');
+
+      self.$element.trigger($.Event('itemRemoved',  { item: item }));
+    },
+
+    /**
+     * Removes all items
+     */
+    removeAll: function() {
+      var self = this;
+
+      $('.tag', self.$container).remove();
+      $('option', self.$element).remove();
+
+      while(self.itemsArray.length > 0)
+        self.itemsArray.pop();
+
+      self.pushVal();
+    },
+
+    /**
+     * Refreshes the tags so they match the text/value of their corresponding
+     * item.
+     */
+    refresh: function() {
+      var self = this;
+      $('.tag', self.$container).each(function() {
+        var $tag = $(this),
+            item = $tag.data('item'),
+            itemValue = self.options.itemValue(item),
+            itemText = self.options.itemText(item),
+            tagClass = self.options.tagClass(item);
+
+          // Update tag's class and inner text
+          $tag.attr('class', null);
+          $tag.addClass('tag ' + htmlEncode(tagClass));
+          $tag.contents().filter(function() {
+            return this.nodeType == 3;
+          })[0].nodeValue = htmlEncode(itemText);
+
+          if (self.isSelect) {
+            var option = $('option', self.$element).filter(function() { return $(this).data('item') === item; });
+            option.attr('value', itemValue);
+          }
+      });
+    },
+
+    /**
+     * Returns the items added as tags
+     */
+    items: function() {
+      return this.itemsArray;
+    },
+
+    /**
+     * Assembly value by retrieving the value of each item, and set it on the
+     * element.
+     */
+    pushVal: function() {
+      var self = this,
+          val = $.map(self.items(), function(item) {
+            return self.options.itemValue(item).toString();
+          });
+
+      self.$element.val(val, true).trigger('change');
+    },
+
+    /**
+     * Initializes the tags input behaviour on the element
+     */
+    build: function(options) {
+      var self = this;
+
+      self.options = $.extend({}, defaultOptions, options);
+      // When itemValue is set, freeInput should always be false
+      if (self.objectItems)
+        self.options.freeInput = false;
+
+      makeOptionItemFunction(self.options, 'itemValue');
+      makeOptionItemFunction(self.options, 'itemText');
+      makeOptionFunction(self.options, 'tagClass');
+      
+      // Typeahead Bootstrap version 2.3.2
+      if (self.options.typeahead) {
+        var typeahead = self.options.typeahead || {};
+
+        makeOptionFunction(typeahead, 'source');
+
+        self.$input.typeahead($.extend({}, typeahead, {
+          source: function (query, process) {
+            function processItems(items) {
+              var texts = [];
+
+              for (var i = 0; i < items.length; i++) {
+                var text = self.options.itemText(items[i]);
+                map[text] = items[i];
+                texts.push(text);
+              }
+              process(texts);
+            }
+
+            this.map = {};
+            var map = this.map,
+                data = typeahead.source(query);
+
+            if ($.isFunction(data.success)) {
+              // support for Angular callbacks
+              data.success(processItems);
+            } else if ($.isFunction(data.then)) {
+              // support for Angular promises
+              data.then(processItems);
+            } else {
+              // support for functions and jquery promises
+              $.when(data)
+               .then(processItems);
+            }
+          },
+          updater: function (text) {
+            self.add(this.map[text]);
+          },
+          matcher: function (text) {
+            return (text.toLowerCase().indexOf(this.query.trim().toLowerCase()) !== -1);
+          },
+          sorter: function (texts) {
+            return texts.sort();
+          },
+          highlighter: function (text) {
+            var regex = new RegExp( '(' + this.query + ')', 'gi' );
+            return text.replace( regex, "<strong>$1</strong>" );
+          }
+        }));
+      }
+
+      // typeahead.js
+      if (self.options.typeaheadjs) {
+          var typeaheadjs = self.options.typeaheadjs || {};
+          
+          self.$input.typeahead(null, typeaheadjs).on('typeahead:selected', $.proxy(function (obj, datum) {
+            if (typeaheadjs.valueKey)
+              self.add(datum[typeaheadjs.valueKey]);
+            else
+              self.add(datum);
+            self.$input.typeahead('val', '');
+          }, self));
+      }
+
+      self.$container.on('click', $.proxy(function(event) {
+        if (! self.$element.attr('disabled')) {
+          self.$input.removeAttr('disabled');
+        }
+        self.$input.focus();
+      }, self));
+
+        if (self.options.addOnBlur && self.options.freeInput) {
+          self.$input.on('focusout', $.proxy(function(event) {
+              // HACK: only process on focusout when no typeahead opened, to
+              //       avoid adding the typeahead text as tag
+              if ($('.typeahead, .twitter-typeahead', self.$container).length === 0) {
+                self.add(self.$input.val());
+                self.$input.val('');
+              }
+          }, self));
+        }
+        
+
+      self.$container.on('keydown', 'input', $.proxy(function(event) {
+        var $input = $(event.target),
+            $inputWrapper = self.findInputWrapper();
+
+        if (self.$element.attr('disabled')) {
+          self.$input.attr('disabled', 'disabled');
+          return;
+        }
+
+        switch (event.which) {
+          // BACKSPACE
+          case 8:
+            if (doGetCaretPosition($input[0]) === 0) {
+              var prev = $inputWrapper.prev();
+              if (prev) {
+                self.remove(prev.data('item'));
+              }
+            }
+            break;
+
+          // DELETE
+          case 46:
+            if (doGetCaretPosition($input[0]) === 0) {
+              var next = $inputWrapper.next();
+              if (next) {
+                self.remove(next.data('item'));
+              }
+            }
+            break;
+
+          // LEFT ARROW
+          case 37:
+            // Try to move the input before the previous tag
+            var $prevTag = $inputWrapper.prev();
+            if ($input.val().length === 0 && $prevTag[0]) {
+              $prevTag.before($inputWrapper);
+              $input.focus();
+            }
+            break;
+          // RIGHT ARROW
+          case 39:
+            // Try to move the input after the next tag
+            var $nextTag = $inputWrapper.next();
+            if ($input.val().length === 0 && $nextTag[0]) {
+              $nextTag.after($inputWrapper);
+              $input.focus();
+            }
+            break;
+         default:
+             // ignore
+         }
+
+        // Reset internal input's size
+        var textLength = $input.val().length,
+            wordSpace = Math.ceil(textLength / 5),
+            size = textLength + wordSpace + 1;
+        $input.attr('size', Math.max(this.inputSize, $input.val().length));
+      }, self));
+
+      self.$container.on('keypress', 'input', $.proxy(function(event) {
+         var $input = $(event.target);
+
+         if (self.$element.attr('disabled')) {
+            self.$input.attr('disabled', 'disabled');
+            return;
+         }
+
+         var text = $input.val(),
+         maxLengthReached = self.options.maxChars && text.length >= self.options.maxChars;
+         if (self.options.freeInput && (keyCombinationInList(event, self.options.confirmKeys) || maxLengthReached)) {
+            self.add(maxLengthReached ? text.substr(0, self.options.maxChars) : text);
+            $input.val('');
+            event.preventDefault();
+         }
+
+         // Reset internal input's size
+         var textLength = $input.val().length,
+            wordSpace = Math.ceil(textLength / 5),
+            size = textLength + wordSpace + 1;
+         $input.attr('size', Math.max(this.inputSize, $input.val().length));
+      }, self));
+
+      // Remove icon clicked
+      self.$container.on('click', '[data-role=remove]', $.proxy(function(event) {
+        if (self.$element.attr('disabled')) {
+          return;
+        }
+        self.remove($(event.target).closest('.tag').data('item'));
+      }, self));
+
+      // Only add existing value as tags when using strings as tags
+      if (self.options.itemValue === defaultOptions.itemValue) {
+        if (self.$element[0].tagName === 'INPUT') {
+            self.add(self.$element.val());
+        } else {
+          $('option', self.$element).each(function() {
+            self.add($(this).attr('value'), true);
+          });
+        }
+      }
+    },
+
+    /**
+     * Removes all tagsinput behaviour and unregsiter all event handlers
+     */
+    destroy: function() {
+      var self = this;
+
+      // Unbind events
+      self.$container.off('keypress', 'input');
+      self.$container.off('click', '[role=remove]');
+
+      self.$container.remove();
+      self.$element.removeData('tagsinput');
+      self.$element.show();
+    },
+
+    /**
+     * Sets focus on the tagsinput
+     */
+    focus: function() {
+      this.$input.focus();
+    },
+
+    /**
+     * Returns the internal input element
+     */
+    input: function() {
+      return this.$input;
+    },
+
+    /**
+     * Returns the element which is wrapped around the internal input. This
+     * is normally the $container, but typeahead.js moves the $input element.
+     */
+    findInputWrapper: function() {
+      var elt = this.$input[0],
+          container = this.$container[0];
+      while(elt && elt.parentNode !== container)
+        elt = elt.parentNode;
+
+      return $(elt);
+    }
+  };
+
+  /**
+   * Register JQuery plugin
+   */
+  $.fn.tagsinput = function(arg1, arg2) {
+    var results = [];
+
+    this.each(function() {
+      var tagsinput = $(this).data('tagsinput');
+      // Initialize a new tags input
+      if (!tagsinput) {
+          tagsinput = new TagsInput(this, arg1);
+          $(this).data('tagsinput', tagsinput);
+          results.push(tagsinput);
+
+          if (this.tagName === 'SELECT') {
+              $('option', $(this)).attr('selected', 'selected');
+          }
+
+          // Init tags from $(this).val()
+          $(this).val($(this).val());
+      } else if (!arg1 && !arg2) {
+          // tagsinput already exists
+          // no function, trying to init
+          results.push(tagsinput);
+      } else if(tagsinput[arg1] !== undefined) {
+          // Invoke function on existing tags input
+          var retVal = tagsinput[arg1](arg2);
+          if (retVal !== undefined)
+              results.push(retVal);
+      }
+    });
+
+    if ( typeof arg1 == 'string') {
+      // Return the results from the invoked function calls
+      return results.length > 1 ? results : results[0];
+    } else {
+      return results;
+    }
+  };
+
+  $.fn.tagsinput.Constructor = TagsInput;
+
+  /**
+   * Most options support both a string or number as well as a function as
+   * option value. This function makes sure that the option with the given
+   * key in the given options is wrapped in a function
+   */
+  function makeOptionItemFunction(options, key) {
+    if (typeof options[key] !== 'function') {
+      var propertyName = options[key];
+      options[key] = function(item) { return item[propertyName]; };
+    }
+  }
+  function makeOptionFunction(options, key) {
+    if (typeof options[key] !== 'function') {
+      var value = options[key];
+      options[key] = function() { return value; };
+    }
+  }
+  /**
+   * HtmlEncodes the given value
+   */
+  var htmlEncodeContainer = $('<div />');
+  function htmlEncode(value) {
+    if (value) {
+      return htmlEncodeContainer.text(value).html();
+    } else {
+      return '';
+    }
+  }
+
+  /**
+   * Returns the position of the caret in the given input field
+   * http://flightschool.acylt.com/devnotes/caret-position-woes/
+   */
+  function doGetCaretPosition(oField) {
+    var iCaretPos = 0;
+    if (document.selection) {
+      oField.focus ();
+      var oSel = document.selection.createRange();
+      oSel.moveStart ('character', -oField.value.length);
+      iCaretPos = oSel.text.length;
+    } else if (oField.selectionStart || oField.selectionStart == '0') {
+      iCaretPos = oField.selectionStart;
+    }
+    return (iCaretPos);
+  }
+
+  /**
+    * Returns boolean indicates whether user has pressed an expected key combination. 
+    * @param object keyPressEvent: JavaScript event object, refer
+    *     http://www.w3.org/TR/2003/WD-DOM-Level-3-Events-20030331/ecma-script-binding.html
+    * @param object lookupList: expected key combinations, as in:
+    *     [13, {which: 188, shiftKey: true}]
+    */
+  function keyCombinationInList(keyPressEvent, lookupList) {
+      var found = false;
+      $.each(lookupList, function (index, keyCombination) {
+          if (typeof (keyCombination) === 'number' && keyPressEvent.which === keyCombination) {
+              found = true;
+              return false;
+          }
+
+          if (keyPressEvent.which === keyCombination.which) {
+              var alt = !keyCombination.hasOwnProperty('altKey') || keyPressEvent.altKey === keyCombination.altKey,
+                  shift = !keyCombination.hasOwnProperty('shiftKey') || keyPressEvent.shiftKey === keyCombination.shiftKey,
+                  ctrl = !keyCombination.hasOwnProperty('ctrlKey') || keyPressEvent.ctrlKey === keyCombination.ctrlKey;
+              if (alt && shift && ctrl) {
+                  found = true;
+                  return false;
+              }
+          }
+      });
+
+      return found;
+  }
+
+  /**
+   * Initialize tagsinput behaviour on inputs and selects which have
+   * data-role=tagsinput
+   */
+  $(function() {
+    $("input[data-role=tagsinput], select[multiple][data-role=tagsinput]").tagsinput();
+  });
+})(window.jQuery);
