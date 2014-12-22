@@ -19,6 +19,11 @@ if (!login_check($mysqli)) {
 $user_id = $_SESSION['user_id'];
 $current_user = $_SESSION['username'];
 
+$user_type = userType($mysqli, $user_id);
+if ($user_type != "admin" || $user_type != "1") {
+	header("Location: ../login");
+}
+
 $error_msg = "";
 
 if (isset($_POST['username'], $_POST['p'])) {

@@ -133,7 +133,16 @@
             <?php 
             	if ($user_type != 2) {
             ?>
-            		<a href="user_progress?id=<?php echo $id_user; ?>" class="btn btn-primary btn-lg pull-right" target="_blank">View Progress</a> </h1>
+            	<a href="user_progress?id=<?php echo $id_user; ?>" class="btn btn-primary btn-lg pull-right" target="_blank">View Progress</a> </h1>
+          		
+          		<h4>trainers: 
+          		<?php 
+        			$trainers = findTrainers($mysqli, $id_user);
+        			foreach ($trainers as $trainer) {
+        				echo userLookup($mysqli, $trainer);
+        			}
+        		?>
+        		</h4>
           	<?php
           		}
           	?>

@@ -391,7 +391,7 @@ function findTrainees($mysqli, $parent_id) {
 	return $trainees;
 }
 
-
+// Deprecated: Trainees should be allowed to have multiple trainers
 function findTrainer($mysqli, $user_id) {
 	$id_parent = -1;
 	if ($stmt = $mysqli->prepare("SELECT id_parent FROM raindrops_relations 
@@ -409,8 +409,63 @@ function findTrainer($mysqli, $user_id) {
 	return $id_parent;
 }
 
+function findTrainers($mysqli, $user_id) {
+	$trainers = array();
+
+	if ($stmt = $mysqli->prepare("SELECT id_parent FROM raindrops_relations 
+										  WHERE id_child = ? ")) {
+		$stmt->bind_param('i', $user_id);
+		$stmt->execute();   // Execute the prepared query.
+		$stmt->store_result();
+
+		if ($stmt->num_rows >= 1) {
+			// If the user exists get variables from result.
+			$stmt->bind_result($id_parent);
+			while ($stmt->fetch()) {
+				$trainers[] = $id_parent;
+			}
+		}
+	}
+	return $trainers;
+}
+
+function findAllTrainers($mysqli) {
+	$trainers = array();
+	$type = "1";
+
+	if ($stmt = $mysqli->prepare("SELECT id FROM raindrops_members
+										  WHERE type = ? ")) {
+		$stmt->bind_param('s', $type);
+		$stmt->execute();   // Execute the prepared query.
+		$stmt->store_result();
+
+		if ($stmt->num_rows >= 1) {
+			// If the user exists get variables from result.
+			$stmt->bind_result($id);
+			while ($stmt->fetch()) {
+				$trainers[] = $id;
+			}
+		}
+	}
+	return $trainers;
+}
+
 function deleteAccount($mysqli, $user_id) {
+	$user_type = userType($mysqli, $user_id);
+	
+	if ($user_type == 2) {
+		// Deletes Data if the user is a trainee
+		$mysqli->query("DELETE FROM raindrops_statistics_access WHERE id_user = $user_id");
+		$mysqli->query("DELETE FROM raindrops_statistics_summary WHERE id_user = $user_id");
+		$mysqli->query("DELETE FROM raindrops_statistics_users WHERE id_user = $user_id");
+		$mysqli->query("DELETE FROM raindrops_points WHERE id_user = $user_id");
+		$mysqli->query("DELETE FROM raindrops_permissions WHERE id_user = $user_id");
+	
+	}
+	
+	// Deletes account info
 	$mysqli->query("DELETE FROM raindrops_members WHERE id = $user_id");
+	$mysqli->query("DELETE FROM raindrops_login_attempts WHERE user_id = $user_id");
 	$mysqli->query("DELETE FROM raindrops_relations WHERE id_parent = $user_id OR id_child = $user_id");
 }
 

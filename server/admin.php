@@ -32,7 +32,8 @@
 	
 	$page = 'Dashboard';
 	$num_unread = getNumberUnreadMessages($mysqli, $user_id);
-	$children = findTrainees($mysqli, $user_id);
+	$all_trainers = findAllTrainers($mysqli);
+	$children = $all_trainers; // Component navigation compatibility
 	$all_trainees = findAllTrainees($mysqli);
 	$users = allUserLookup($mysqli);
 	$welcome = false;
@@ -71,9 +72,15 @@
 		}
 	?>
 	
-	<div id="contextMenu" class="dropdown clearfix">
+	<div id="contextMenu" class="context-menu dropdown clearfix">
 		<ul class="dropdown-menu" role="menu" aria-labelledby="dropdownMenu" style="display:block;position:static;margin-bottom:5px;">
 			<li><a id="delete-trainer" tabindex="-1" href="#">Delete Trainer</a></li>
+		</ul>
+	</div>
+	
+	<div id="contextMenuTrainee" class="context-menu dropdown clearfix">
+		<ul class="dropdown-menu" role="menu" aria-labelledby="dropdownMenu" style="display:block;position:static;margin-bottom:5px;">
+			<li><a id="delete-trainee" tabindex="-1" href="#">Delete Trainee</a></li>
 		</ul>
 	</div>
 	
@@ -100,11 +107,11 @@
               </div>
               <div class="panel-body">
 				<div class="alert alert-info">
-				  <strong>Note </strong> Trainers interact with trainees and monitor their progress over time.
+					Trainers interact with trainees and monitor their progress over time.
 				</div>
                 <div class="list-group">
 				  <?php
-						foreach ($children as $trainer) {
+						foreach ($all_trainers as $trainer) {
 							$trainerName = userLookup($mysqli, $trainer);
 							echo '<a href="user?id=' . $trainer . '" class="list-group-item trainer-item" data-id="' . $trainer . '" data-name="' . $trainerName . '">
 									<i class="fa fa-user"></i>&nbsp;&nbsp;' . $trainerName . '
@@ -125,18 +132,18 @@
               </div>
               <div class="panel-body">
 				<div class="alert alert-info">
-				  <strong>Note </strong> Trainees can monitor their progress on the web or on the app.
+					Trainees can monitor their progress on the web or on the app.
 				</div>
                 <div class="list-group">
 				  <?php
 						foreach ($all_trainees as $trainee) {
 							$traineeName = userLookup($mysqli, $trainee);
-							echo '<a href="user?id=' . $trainee . '" class="list-group-item trainer-item" data-id="' . $trainee . '" data-name="' . $traineeName . '">
+							echo '<a href="user?id=' . $trainee . '" class="list-group-item trainee-item" data-id="' . $trainee . '" data-name="' . $traineeName . '">
 									<i class="fa fa-user"></i>&nbsp;&nbsp;' . $traineeName . '
 								  </a>';
 						}
 				  ?>
-				  <a href="register_trainee" class="list-group-item">
+				  <a href="register" class="list-group-item">
 					<i class="fa fa-plus"></i>&nbsp;&nbsp;New Trainee
 				  </a>
                 </div>
@@ -199,9 +206,9 @@
     <script src="js/tablesorter/tables.js"></script>
 
 	<script>
+		// Trainer Click Listener
 		var clickedTrainerName;
 		var clickedTrainerID;
-		
 		$("body").on("contextmenu", ".trainer-item", function (e) {
 			clickedTrainerID = $(this).data('id');
 			clickedTrainerName = $(this).data('name');
@@ -214,22 +221,48 @@
 		});
 		
 		$('#delete-trainer').click(function() {
-			_openWarningPopup(clickedTrainerID, clickedTrainerName);
+			_openWarningPopup(true, clickedTrainerID, clickedTrainerName);
 		});
 		
 		$('body').click(function () {
 			$('#contextMenu').hide();
 		});
 		
-		function _openWarningPopup(trainerID, trainerName) {
+		// Trainee click listener
+		var clickedTraineeName;
+		var clickedTraineeID;
+		$("body").on("contextmenu", ".trainee-item", function (e) {
+			clickedTraineeID = $(this).data('id');
+			clickedTraineeName = $(this).data('name');
+			$('#contextMenuTrainee').css({
+				display: "block",
+				left: e.pageX,
+				top: e.pageY
+			});
+			return false;
+		});
+		
+		$('#delete-trainee').click(function() {
+			_openWarningPopup(false, clickedTraineeID, clickedTraineeName);
+		});
+		
+		$('body').click(function () {
+			$('#contextMenuTrainee').hide();
+		});
+		
+		function _openWarningPopup(isTrainer, id, name) {
 			var confirmPopupHTML = '<div id="whiteout"></div>\
 							<div id="warning-popup" class="thumbnail warning-popup">\
 								<div class="caption">\
-									<h4>Delete ' + trainerName + '?</h4><br />\
-									<p>This will not delete any trainees associated with this trainer</p>\
-									<p>';
-		
-			confirmPopupHTML += '<a id="delete-confirm" href="#" class="btn btn-primary" role="button">Delete ' + trainerName + '</a><br />';
+									<h4>Delete ' + name + '?</h4><br />';
+			
+			if (isTrainer) {
+				confirmPopupHTML += '<p>This will not delete any trainees associated with this trainer</p>';
+			} else {
+				confirmPopupHTML += '<p>This will delete the trainee account and any training data associated with this trainee</p>';
+			}			
+			confirmPopupHTML += '<p>';
+			confirmPopupHTML += '<a id="delete-confirm" href="#" class="btn btn-primary" role="button">Delete ' + name + '</a><br />';
 			confirmPopupHTML += '<a id="delete-cancel" href="#" class="btn btn-default" role="button">Cancel</a>\
 							</p>\
 						</div>\
@@ -242,7 +275,11 @@
 			$('#delete-confirm').click(function() {
 				$('#whiteout').remove();
 				$('#warning-popup').remove();
-				window.location.href = 'delete_trainer.php?id=' + trainerID;
+				if (isTrainer) {
+					window.location.href = 'delete_trainer.php?id=' + id;
+				} else {
+					window.location.href = 'delete_trainee.php?id=' + id;
+				}
 			});
 			$('#delete-cancel').click(function() {
 				$('#whiteout').remove();

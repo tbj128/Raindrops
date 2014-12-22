@@ -23,8 +23,9 @@ if (!login_check($mysqli)) {
 
 $user_id = $_SESSION['user_id'];
 $username = $_SESSION['username'];
+$user_type = userType($mysqli, $user_id);
 
-if ($username != $admin_user) {
+if ($user_type != "admin") {
 	header("Location: index.php");
 }
 

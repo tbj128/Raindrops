@@ -1,17 +1,26 @@
 <?php
+
 	$php_config = 'config.php';
+	$alert_show = false;
 	
 	if (!file_exists($php_config)) {
 		header("Location: setup.php");
+	} else {
+		include 'config.php';
 	}
 	
 	include_once 'config.php';
 	include_once 'includes/functions.php';
 
+
 	$mysqli = new mysqli($db_host, $db_username, $db_password, $db_database);
 	if (mysqli_connect_errno()) {
 		printf("Connect failed: %s\n", mysqli_connect_error());
 		exit();
+	}
+
+	if (isset($_GET['error'])) {
+		$alert_show = true;
 	}
 
 	sec_session_start();
@@ -22,23 +31,10 @@
 	
 	$user_id = $_SESSION['user_id'];
 	$username = $_SESSION['username'];
-
-	// ======================
-
-	$parent = -1;
-	if (isset($_GET['p'])) {
-		$parent = $_GET['p'];
-	} else {
-		$alert_show = true;
-	}
-
-	$user_type = userType($mysqli, $user_id);
-	if ($user_type != "admin") {
+	
+	if ($username != $admin_user) {
 		header("Location: index");
 	}
-
-	$parent_name = userLookup($mysqli, $parent);
-
 ?>
 
 <!DOCTYPE html>
@@ -49,7 +45,7 @@
     <meta name="description" content="">
     <meta name="author" content="">
 
-    <title><?php echo $app_name; ?> - Link Existing Account</title>
+    <title><?php echo $app_name; ?> - Create New Trainee Account</title>
 
     <!-- Bootstrap core CSS -->
     <link href="css/bootstrap.css" rel="stylesheet">
@@ -75,22 +71,39 @@
 		?>
 		
 		<div class="jumbotron box-width align-center">
-		  <h2>Link an Existing Trainee</h2>
-		  <p>Link an existing trainee to the trainer <strong><?php echo $parent_name; ?></strong>.</p>
+		  	<h1>Register</h1>
+		  	<h3>Create a new trainee account for a trainer.</h3><br />
 		  
-				<form method="post" action="includes/process_existing_trainee.php">
-					<input type="hidden" name="parent" value="<?php echo $parent; ?>" >
-					<select name="trainee">
+			<form method="post" action="includes/process_trainee.php">
+				<div class="form-group">
+					<label for="parent">Trainer&nbsp;&nbsp;&nbsp;</label>
+					<select name="parent">
 					<?php
-						$trainees = findAllTrainees($mysqli);
-						foreach ($trainees as $trainee) {
-							$trainee_name = userLookup($mysqli, $trainee);
-							echo '<option value="' . $trainee . '">' . $trainee_name . '</option>';
+						$all_trainers = findAllTrainers($mysqli);
+						foreach ($all_trainers as $trainer) {
+							$trainerName = userLookup($mysqli, $trainer);
+							echo '<option value="' . $trainer . '">' . $trainerName . '</option>';
 						}
 					?>
-					</select><br />
-					<input type="submit" class="btn btn-primary btn-lg" />
-				</form>
+					</select>
+				</div>
+				<div class="form-group">
+					<input class="form-control" name="username" placeholder="Username" minlength="4" >
+				</div>
+				<div class="form-group">
+					<input class="form-control" id="password" name="password" type="password" placeholder="Password" minlength="4" >
+				</div>
+				<div class="form-group">
+					<input class="form-control" id="confirmpwd" name="confirmpwd" type="password" placeholder="Confirm Password" minlength="4" >
+				</div>
+				<p> <input type="button" 
+					class="btn btn-primary btn-lg" 
+					value="Create" 
+					onclick="return regformhash(this.form,
+							   this.form.username,
+							   this.form.password,
+							   this.form.confirmpwd);" /> </p>
+			</form>
 		</div>
 
     </div><!-- /#wrapper -->
@@ -99,5 +112,8 @@
 	<script src="js/jquery-1.7.2.js"></script>
     <script src="js/bootstrap.js"></script>
 	
+	<script type="text/JavaScript" src="js/sha512.js"></script> 
+	<script type="text/JavaScript" src="js/forms.js"></script> 
+
   </body>
 </html>

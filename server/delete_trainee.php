@@ -23,6 +23,7 @@ if (!login_check($mysqli)) {
 
 $user_id = $_SESSION['user_id'];
 $username = $_SESSION['username'];
+$user_type = userType($mysqli, $user_id);
 
 if (isset($_GET['id'])) {
 	$id_user = $_GET['id'];
@@ -30,7 +31,7 @@ if (isset($_GET['id'])) {
 	
 	$children = findTrainees($mysqli, $user_id);
 	// Security check: Is user allowed to access this trainee's data?
-	if (!in_array($id_user, $children)) {
+	if (!in_array($id_user, $children) && $user_type != "admin") {
 		printf("Invalid permissions.\n");
 		exit();
 	}
