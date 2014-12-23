@@ -32,6 +32,16 @@ $name_user = userLookup($mysqli, $id_user);
 $permissions = findPermissions($mysqli, $id_user);
 $num_unread = getNumberUnreadMessages($mysqli, $user_id);
 
+$user_type = userType($mysqli, $user_id);
+$target_user_type = userType($mysqli, $id_user);
+if ($user_type != 2) {
+	$children = findTrainees($mysqli, $user_id);
+	// Security check: Is user allowed to access this trainee's data?
+	if ($user_type != "admin" && !in_array($id_user, $children)) {
+		printf("Invalid permissions.\n");
+		exit();
+	}
+}
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -41,7 +51,7 @@ $num_unread = getNumberUnreadMessages($mysqli, $user_id);
     <meta name="description" content="">
     <meta name="author" content="">
 
-    <title>Raindrops User Progress</title>
+    <title>User Progress</title>
 
     <!-- Bootstrap core CSS -->
     <link href="css/bootstrap.css" rel="stylesheet">
@@ -175,7 +185,7 @@ $num_unread = getNumberUnreadMessages($mysqli, $user_id);
               <li class="active"><i class="fa fa-list"></i> Main</li>
             </ol>
 			<div id="alert-no-items" class="alert alert-info alert-dismissable" style="display:none;">
-              <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
+              <button type="button" class="close" data-dismiss="alert" aria-hidden="true">ï¿½</button>
 			  <strong>This folder has no items yet.</strong> Click "Add New Item" to add a new item into this folder.
             </div>
 			<?php 

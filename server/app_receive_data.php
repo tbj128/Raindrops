@@ -65,7 +65,23 @@
 
 				$mysqli->query("UPDATE raindrops_statistics_users SET viewing_time = $updated_viewing_time, timed_activity_time = $updated_timed_activity_time, num_completed = $updated_num_completed 
 								WHERE id_user = $user_id");
+			}
+			
+			// Update permissions
+			// TODO: Redundant completed field in permissions
+			if ($stmt = $mysqli->prepare("SELECT completed FROM raindrops_permissions 
+										  WHERE component = ? AND id_user = ?")) {
+				$stmt->bind_param('si', $content_id, $user_id);
+				$stmt->execute();   // Execute the prepared query.
+				$stmt->store_result();
+				$locked = 0;
+				$completed = 1;
 		
+				if ($stmt->num_rows >= 1) {
+					$mysqli->query("UPDATE raindrops_permissions SET completed = 1 WHERE id_user = $user_id AND component = '$content_id'");
+				} else {
+					$mysqli->query("INSERT INTO raindrops_permissions(id_user, component, locked, completed) VALUES ($user_id, '$content_id', $locked, $completed)");
+				}
 			}
 		}
 	}
