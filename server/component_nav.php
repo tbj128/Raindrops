@@ -24,11 +24,10 @@
 			<?php
 				}
 			?>
-			<li style="width:100%;background-color:#464646;height:1px;"></li>
 			<li <?php echo ($page == 'Compose' ? 'class="active"' : ''); ?>><a href="compose"><i class="fa fa-pencil"></i> Compose Message</a></li>
             <li <?php echo ($page == 'Inbox' ? 'class="active"' : ''); ?>><a href="inbox"><i class="fa fa-envelope"></i> Inbox (<?php echo $num_unread; ?>)</a></li>
             <li <?php echo ($page == 'Outbox' ? 'class="active"' : ''); ?>><a href="outbox"><i class="fa fa-envelope"></i> Outbox</a></li>
-			<li style="width:100%;background-color:#464646;height:1px;"></li>
+			<li style="width:100%;background-color:#1976D2;height:1px;"></li>
 			<?php
 				foreach ($children as $trainer) {
 					$trainer_name = $users[$trainer];
