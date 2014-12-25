@@ -74,7 +74,7 @@
 		?>
 		<div class="alert alert-success alert-dismissable box-width align-center-top">
 			<button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
-			<strong>Yay!</strong> You've successfully completed setup. Login to continue.
+			<strong>Yay!</strong> You've successfully completed setup. Login with the administrator account to continue.
 		</div>
 		<?php
 			}
