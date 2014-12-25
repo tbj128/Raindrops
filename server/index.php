@@ -13,7 +13,7 @@
 	if (mysqli_connect_errno()) {
 		header("Location: setup.php");
 	}
-exit();
+	
 	sec_session_start();
 	 
 	if (!login_check($mysqli)) {
