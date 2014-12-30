@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="480dp"
+    android:layout_height="wrap_content"
+    android:background="@drawable/bg_white_rounded"
+    android:orientation="vertical"
+    android:minWidth="220dp"
+    android:layout_gravity="center"
+    android:layout_marginLeft="120dp"
+    android:layout_marginRight="120dp">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:gravity="center"
+        android:padding="24dp">
+
+        <!-- Top Bar -->
+        <RelativeLayout
+            android:id="@+id/dialog_header"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content">
+
+            <TextView
+                android:id="@+id/sw_title"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:paddingBottom="16dp"
+                android:text="Practice Activity"
+                android:textColor="@color/grey900"
+                android:textSize="20sp"
+                android:textStyle="bold" />
+
+            <ImageButton
+                android:id="@+id/sw_close"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@drawable/bg_white_rounded_selector"
+                android:layout_alignParentRight="true"
+                android:src="@drawable/ic_action_remove_dark"/>
+
+        </RelativeLayout>
+
+        <TextView
+            android:id="@+id/sw_time"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="24dip"
+            android:text="10:02:20"
+            android:textColor="@color/grey900"
+            android:textSize="58dip" />
+
+        <TextView
+            android:id="@+id/sw_prev_time"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dip"
+            android:text="previously practiced 10:02:20"
+            android:textColor="@color/grey500"
+            android:textSize="18dip" />
+
+        <Button
+            android:id="@+id/sw_finish"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@drawable/nav_green_button_selector"
+            android:drawableLeft="@drawable/ic_action_accept"
+            android:drawablePadding="15sp"
+            android:gravity="left|center_vertical"
+            android:paddingLeft="24dp"
+            android:paddingRight="36dp"
+            android:text="Finished Practicing"
+            android:paddingTop="6dp"
+            android:paddingBottom="6dp"
+            android:layout_marginTop="24dp"
+            android:textColor="@color/grey50"
+            android:textSize="16dp" />
+    </LinearLayout>
+
+</LinearLayout>

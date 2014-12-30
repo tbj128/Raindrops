@@ -1,0 +1,180 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="480dp"
+    android:layout_height="wrap_content"
+    android:layout_gravity="center"
+    android:layout_marginLeft="120dp"
+    android:layout_marginRight="120dp"
+    android:background="@drawable/bg_white_rounded"
+    android:minWidth="220dp"
+    android:orientation="vertical">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:padding="24dp">
+
+        <!-- Top Bar -->
+        <RelativeLayout
+            android:id="@+id/dialog_header"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content">
+
+            <TextView
+                android:id="@+id/dialog_title"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:paddingBottom="16dp"
+                android:text="Audio Recorder"
+                android:textColor="@color/grey900"
+                android:textSize="20sp"
+                android:textStyle="bold" />
+
+            <ImageButton
+                android:id="@+id/dialog_close"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@drawable/bg_white_rounded_selector"
+                android:layout_alignParentRight="true"
+                android:src="@drawable/ic_action_remove_dark"/>
+
+        </RelativeLayout>
+
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_below="@+id/dialog_header">
+
+            <TextView
+                android:id="@+id/ar_timer"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="24dip"
+                android:text="00:00"
+                android:textColor="@color/grey500"
+                android:textSize="42dp" />
+
+            <SeekBar
+                android:id="@+id/ar_seek"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="24dp"
+                android:layout_marginRight="24dp"
+                android:layout_marginTop="48dp"
+                android:visibility="gone" />
+
+
+            <TextView
+                android:id="@+id/ar_playback_timer"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:layout_below="@id/ar_seek"
+                android:layout_marginRight="36dp"
+                android:layout_marginTop="4dip"
+                android:text="10:02/23:12"
+                android:textColor="@color/grey500"
+                android:textSize="12dp"
+                android:visibility="gone" />
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="116dp">
+
+                <RelativeLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerInParent="true">
+
+                    <Button
+                        android:id="@+id/ar_record"
+                        android:layout_width="wrap_content"
+                        android:layout_height="40dp"
+                        android:layout_marginLeft="20dip"
+                        android:background="@drawable/bg_red900_rounded_selector"
+                        android:drawableLeft="@drawable/ic_action_mic"
+                        android:drawablePadding="15sp"
+                        android:gravity="left|center_vertical"
+                        android:paddingLeft="12dp"
+                        android:paddingRight="24dp"
+                        android:text="Record"
+                        android:textColor="@color/grey50"
+                        android:textSize="16dp" />
+
+                    <Button
+                        android:id="@+id/ar_stop"
+                        android:layout_width="wrap_content"
+                        android:layout_height="40dp"
+                        android:layout_marginLeft="20dip"
+                        android:background="@drawable/bg_red900_rounded_selector"
+                        android:drawableLeft="@drawable/ic_action_stop"
+                        android:drawablePadding="15sp"
+                        android:gravity="left|center_vertical"
+                        android:paddingLeft="12dp"
+                        android:paddingRight="24dp"
+                        android:text="Stop Recording"
+                        android:textColor="@color/grey50"
+                        android:textSize="16dp"
+                        android:visibility="gone" />
+
+                    <RelativeLayout
+                        android:id="@+id/ar_playpause_container"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="12dip"
+                        android:layout_marginRight="12dip"
+                        android:layout_toRightOf="@id/ar_record">
+
+                        <Button
+                            android:id="@+id/ar_pause"
+                            android:layout_width="wrap_content"
+                            android:layout_height="40dp"
+                            android:background="@drawable/nav_green_button_selector"
+                            android:drawableLeft="@drawable/ic_action_pause_over_video"
+                            android:drawablePadding="15sp"
+                            android:gravity="left|center_vertical"
+                            android:paddingLeft="12dp"
+                            android:paddingRight="24dp"
+                            android:text="Pause"
+                            android:textColor="@color/grey50"
+                            android:textSize="16dp"
+                            android:visibility="gone" />
+
+                        <Button
+                            android:id="@+id/ar_play"
+                            android:layout_width="wrap_content"
+                            android:layout_height="40dp"
+                            android:layout_centerHorizontal="true"
+                            android:background="@drawable/nav_green_button_selector"
+                            android:drawableLeft="@drawable/ic_action_play_over_video"
+                            android:drawablePadding="15sp"
+                            android:gravity="left|center_vertical"
+                            android:paddingLeft="12dp"
+                            android:paddingRight="24dp"
+                            android:text="Playback"
+                            android:textColor="@color/grey50"
+                            android:textSize="16dp"
+                            android:visibility="gone" />
+                    </RelativeLayout>
+
+                    <Button
+                        android:id="@+id/ar_finish"
+                        android:layout_width="wrap_content"
+                        android:layout_height="56dp"
+                        android:layout_toRightOf="@id/ar_playpause_container"
+                        android:background="@drawable/bg_blue700_rounded_selector"
+                        android:paddingLeft="36dp"
+                        android:paddingRight="36dp"
+                        android:text="Finish"
+                        android:textColor="@color/white"
+                        android:textSize="16dp"
+                        android:visibility="gone" />
+                </RelativeLayout>
+            </RelativeLayout>
+        </RelativeLayout>
+    </LinearLayout>
+</LinearLayout>

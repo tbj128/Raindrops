@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/blue900" >
+
+    <RelativeLayout
+        android:id="@+id/vp_nav_container"
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        android:layout_alignParentTop="true"
+        android:background="@color/blue900">
+
+        <Button
+            android:id="@+id/vp_back_btn"
+            android:layout_width="wrap_content"
+            android:layout_height="40dip"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="12dp"
+            android:background="@drawable/bg_blue700_rounded_selector"
+            android:drawableLeft="@drawable/ic_action_previous_item"
+            android:drawablePadding="4dp"
+            android:paddingLeft="12dp"
+            android:paddingRight="24dp"
+            android:text="Home"
+            android:textColor="@color/white"
+            android:textSize="16dp" />
+
+        <ImageButton
+            android:id="@+id/vp_favourite"
+            android:layout_width="48dip"
+            android:layout_height="48dip"
+            android:layout_toLeftOf="@+id/vp_practice"
+            android:layout_centerVertical="true"
+            android:layout_marginRight="12dip"
+            android:background="@drawable/bg_blue_rounded_selector"
+            android:contentDescription="@string/app_name"
+            android:src="@drawable/ic_action_not_important" />
+
+        <ImageButton
+            android:id="@+id/vp_practice"
+            android:layout_width="48dip"
+            android:layout_height="48dip"
+            android:layout_toLeftOf="@+id/vp_info"
+            android:layout_centerVertical="true"
+            android:layout_marginRight="12dip"
+            android:background="@drawable/bg_blue_rounded_selector"
+            android:contentDescription="@string/app_name"
+            android:src="@drawable/ic_action_time" />
+
+        <ImageButton
+            android:id="@+id/vp_info"
+            android:layout_width="48dip"
+            android:layout_height="48dip"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:layout_marginRight="12dip"
+            android:layout_marginTop="10dip"
+            android:background="@drawable/bg_blue_rounded_selector"
+            android:contentDescription="@string/app_name"
+            android:src="@drawable/ic_action_about" />
+
+        <TextView
+            android:id="@+id/vp_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:layout_marginLeft="8dp"
+            android:text="Some Video Title"
+            android:textColor="@color/white"
+            android:textSize="18dp" />
+
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:id="@+id/vp_container"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_alignParentTop="true"
+        android:layout_marginTop="60dip"
+        android:background="@color/black">
+
+        <com.kinetiqa.glacier.ui.components.MediaVideoView
+            android:id="@+id/vp_video"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_centerHorizontal="true" />
+
+    </RelativeLayout>
+
+</RelativeLayout>

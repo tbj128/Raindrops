@@ -1,0 +1,178 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/semitransparent"
+    android:orientation="vertical">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        android:layout_alignParentTop="true"
+        android:background="@color/blue900">
+
+        <Button
+            android:id="@+id/mv_back_btn"
+            android:layout_width="wrap_content"
+            android:layout_height="40dip"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="12dp"
+            android:background="@drawable/bg_blue700_rounded_selector"
+            android:drawableLeft="@drawable/ic_action_previous_item"
+            android:drawablePadding="4dp"
+            android:paddingLeft="12dp"
+            android:paddingRight="24dp"
+            android:text="Messages"
+            android:textColor="@color/white"
+            android:textSize="16dp" />
+
+        <ImageButton
+            android:id="@+id/mv_trash_btn"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:layout_marginRight="24dp"
+            android:background="@drawable/bg_blue_rounded_selector"
+            android:contentDescription="@string/app_name"
+            android:padding="4dp"
+            android:scaleType="fitXY"
+            android:src="@drawable/ic_action_discard" />
+
+        <TextView
+            android:id="@+id/mv_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:layout_marginLeft="8dp"
+            android:text="Some Message Title"
+            android:textColor="@color/white"
+            android:textSize="18dp" />
+
+    </RelativeLayout>
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:fillViewport="true"
+        android:background="@color/white">
+
+        <LinearLayout
+            android:id="@+id/message_wrapper"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/mv_body"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="6dip"
+                android:layout_marginLeft="54dip"
+                android:layout_marginRight="54dip"
+                android:paddingBottom="12dip"
+                android:paddingTop="54dip"
+                android:text="Lorem ipsum asee nnqlks iopzm jaqqz jzno dkkenwen I owlkn"
+                android:textColor="@color/grey900"
+                android:textSize="14sp" />
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:layout_marginLeft="54dp"
+                android:layout_marginRight="54dp"
+                android:layout_marginTop="24dp"
+                android:layout_marginBottom="24dp"
+                android:background="@color/grey50" />
+
+            <LinearLayout
+                android:id="@+id/message_video_container"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:gravity="center"
+                android:orientation="vertical">
+
+                <com.kinetiqa.glacier.ui.components.MediaVideoView
+                    android:id="@+id/mv_video"
+                    android:layout_width="match_parent"
+                    android:layout_height="400dp"
+                    android:gravity="center"
+                    android:visibility="gone"/>
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_marginTop="48dip"
+                    android:paddingLeft="54dp"
+                    android:paddingRight="54dp">
+
+                    <SeekBar
+                        android:id="@+id/mv_seek"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="24dp"
+                        android:layout_marginRight="24dp"
+                        android:visibility="gone" />
+
+                    <RelativeLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@id/mv_seek"
+                        android:layout_marginTop="24dp">
+
+                        <RelativeLayout
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="24dip"
+                            android:layout_marginRight="12dip">
+
+                            <Button
+                                android:id="@+id/mv_audio_pause"
+                                android:layout_width="wrap_content"
+                                android:layout_height="40dp"
+                                android:background="@drawable/nav_green_button_selector"
+                                android:drawableLeft="@drawable/ic_action_pause_over_video"
+                                android:drawablePadding="15sp"
+                                android:gravity="left|center_vertical"
+                                android:paddingLeft="12dp"
+                                android:paddingRight="24dp"
+                                android:text="Pause"
+                                android:textColor="@color/grey50"
+                                android:textSize="16dp"
+                                android:visibility="gone" />
+
+                            <Button
+                                android:id="@+id/mv_audio_play"
+                                android:layout_width="wrap_content"
+                                android:layout_height="40dp"
+                                android:background="@drawable/nav_green_button_selector"
+                                android:drawableLeft="@drawable/ic_action_play_over_video"
+                                android:drawablePadding="15sp"
+                                android:gravity="left|center_vertical"
+                                android:paddingLeft="12dp"
+                                android:paddingRight="24dp"
+                                android:text="Play"
+                                android:textColor="@color/grey50"
+                                android:textSize="16dp"
+                                android:visibility="gone" />
+                        </RelativeLayout>
+
+                        <TextView
+                            android:id="@+id/mv_audio_time"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_alignParentRight="true"
+                            android:layout_marginRight="24dp"
+                            android:layout_marginTop="12dp"
+                            android:text="1:23 / 23:23"
+                            android:textColor="@color/grey500"
+                            android:visibility="gone" />
+                    </RelativeLayout>
+                </RelativeLayout>
+            </LinearLayout>
+        </LinearLayout>
+    </ScrollView>
+
+
+</LinearLayout>

@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <PreferenceCategory android:title="Classroom Access">
+
+        <EditTextPreference
+            android:defaultValue=""
+            android:key="address"
+            android:summary="The address of the classroom server."
+            android:title="Classroom Code" />
+
+        <PreferenceScreen
+            android:key="change_user_account"
+            android:summary="Enter a new username and password to associate this tablet with a new account"
+            android:title="Switch User Accounts" />
+
+    </PreferenceCategory>
+
+    <PreferenceCategory android:title="Advanced Settings">
+
+        <PreferenceScreen
+            android:key="sync_now"
+            android:summary="Check for new messages and send training information."
+            android:title="Sync Tablet Now" />
+
+        <EditTextPreference
+            android:defaultValue="http"
+            android:key="url_protocol"
+            android:summary="What is the URL protocol to be used for communication with the server?"
+            android:title="URL Protocol" />
+
+    </PreferenceCategory>
+
+    <PreferenceCategory android:title="About">
+
+        <PreferenceScreen
+            android:key="version"
+            android:summary="0.1 beta"
+            android:title="Version" />
+
+    </PreferenceCategory>
+</PreferenceScreen>

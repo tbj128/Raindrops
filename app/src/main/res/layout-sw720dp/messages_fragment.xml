@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@null">
+
+    <!-- Messages Area -->
+
+    <!-- Menu Layout -->
+    <RelativeLayout
+        android:id="@+id/messages_area"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:padding="24dp">
+
+        <ImageButton
+            android:id="@+id/messages_delete"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:layout_alignParentRight="true"
+            android:background="@drawable/bg_blue_rounded_selector"
+            android:contentDescription="@string/app_name"
+            android:padding="4dp"
+            android:scaleType="fitXY"
+            android:src="@drawable/ic_action_discard"/>
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_below="@id/messages_delete"
+            android:layout_marginTop="8dp">
+
+            <ListView
+                android:id="@+id/message_list"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="6dp"
+                android:background="@drawable/bg_grey50_rounded"
+                android:divider="@color/grey200"
+                android:dividerHeight="1px"
+                android:paddingBottom="2dp"
+                android:paddingTop="2dp" />
+
+            <TextView
+                android:id="@+id/messages_empty"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerInParent="true"
+                android:text="No messages yet"
+                android:textColor="@color/white"
+                android:textSize="14dp"
+                android:visibility="gone" />
+        </RelativeLayout>
+    </RelativeLayout>
+</RelativeLayout>

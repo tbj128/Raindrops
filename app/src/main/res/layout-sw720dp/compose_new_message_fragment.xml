@@ -1,0 +1,159 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@null">
+
+    <!-- Compose Messages Area -->
+    <ScrollView
+        android:id="@+id/cm_scroll"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <RelativeLayout
+            android:id="@+id/cm_area"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_alignParentTop="true"
+                android:layout_marginBottom="36dip"
+                android:layout_marginLeft="32dp"
+                android:layout_marginRight="32dp"
+                android:layout_marginTop="18dip"
+                android:background="@drawable/bg_white_rounded"
+                android:padding="12dp">
+
+                <EditText
+                    android:id="@+id/cm_title"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="8dp"
+                    android:layout_marginLeft="16dp"
+                    android:layout_marginRight="16dp"
+                    android:layout_marginTop="2dp"
+                    android:hint="Subject"
+                    android:inputType="text"
+                    android:lines="1"
+                    android:cursorVisible="true"
+                    android:textColor="@color/grey900"
+                    android:textColorHint="@color/grey900"
+                    android:textSize="18dp" />
+
+                <View
+                    android:id="@+id/cm_divider"
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:layout_below="@id/cm_title"
+                    android:background="@color/grey50" />
+
+                <EditText
+                    android:id="@+id/cm_body"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/cm_divider"
+                    android:layout_marginBottom="8dp"
+                    android:layout_marginLeft="16dp"
+                    android:layout_marginRight="16dp"
+                    android:layout_marginTop="8dp"
+                    android:gravity="top"
+                    android:hint="Message..."
+                    android:inputType="textMultiLine"
+                    android:lines="7"
+                    android:cursorVisible="true"
+                    android:textColor="@color/grey900"
+                    android:textColorHint="@color/grey900"
+                    android:textSize="18dp" />
+
+                <View
+                    android:id="@+id/cm_divider2"
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:layout_below="@id/cm_body"
+                    android:layout_marginBottom="8dp"
+                    android:background="@color/grey50" />
+
+                <Button
+                    android:id="@+id/cm_send"
+                    android:layout_width="wrap_content"
+                    android:layout_height="40dip"
+                    android:layout_alignParentLeft="true"
+                    android:layout_below="@id/cm_divider2"
+                    android:background="@drawable/bg_blue700_rounded_selector"
+                    android:paddingLeft="24dp"
+                    android:paddingRight="24dp"
+                    android:text="Send"
+                    android:textColor="@color/white"
+                    android:textSize="16dp" />
+
+                <Button
+                    android:id="@+id/cm_add_video"
+                    android:layout_width="wrap_content"
+                    android:layout_height="40dip"
+                    android:layout_alignParentRight="true"
+                    android:layout_below="@id/cm_divider2"
+                    android:background="@drawable/bg_red900_rounded_selector"
+                    android:drawableLeft="@drawable/ic_action_video"
+                    android:drawablePadding="4dp"
+                    android:paddingLeft="12dp"
+                    android:paddingRight="24dp"
+                    android:text="Add Video"
+                    android:textColor="@color/white"
+                    android:textSize="16dp" />
+
+                <Button
+                    android:id="@+id/cm_add_audio"
+                    android:layout_width="wrap_content"
+                    android:layout_height="40dip"
+                    android:layout_below="@id/cm_divider2"
+                    android:layout_marginRight="12dp"
+                    android:layout_toLeftOf="@id/cm_add_video"
+                    android:background="@drawable/bg_red900_rounded_selector"
+                    android:drawableLeft="@drawable/ic_action_mic"
+                    android:drawablePadding="4dp"
+                    android:paddingLeft="12dp"
+                    android:paddingRight="24dp"
+                    android:text="Add Audio"
+                    android:textColor="@color/white"
+                    android:textSize="16dp" />
+
+                <Button
+                    android:id="@+id/cm_attachment"
+                    android:layout_width="wrap_content"
+                    android:layout_height="40dip"
+                    android:layout_below="@id/cm_divider2"
+                    android:layout_centerVertical="true"
+                    android:layout_marginRight="-8dp"
+                    android:layout_toLeftOf="@+id/cm_remove_attached"
+                    android:background="@drawable/bg_red900_rounded_selector"
+                    android:drawableLeft="@drawable/ic_action_play_over_video"
+                    android:drawablePadding="4dp"
+                    android:paddingLeft="12dp"
+                    android:paddingRight="24dp"
+                    android:text="Video Attachment"
+                    android:textColor="@color/white"
+                    android:textSize="16dp"
+                    android:visibility="gone" />
+
+                <Button
+                    android:id="@+id/cm_remove_attached"
+                    android:layout_width="wrap_content"
+                    android:layout_height="40dip"
+                    android:layout_alignParentRight="true"
+                    android:layout_below="@id/cm_divider2"
+                    android:layout_centerVertical="true"
+                    android:background="@drawable/bg_red500_rounded"
+                    android:drawableLeft="@drawable/ic_action_remove"
+                    android:drawablePadding="0dp"
+                    android:paddingLeft="16dp"
+                    android:paddingRight="12dp"
+                    android:text=""
+                    android:textColor="@color/white"
+                    android:textSize="16dp"
+                    android:visibility="gone" />
+            </RelativeLayout>
+        </RelativeLayout>
+    </ScrollView>
+</RelativeLayout>

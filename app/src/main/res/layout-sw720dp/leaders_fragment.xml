@@ -1,0 +1,146 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@null">
+
+    <!-- Leaders Area -->
+    <RelativeLayout
+        android:id="@+id/leaders_area"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_alignParentTop="true"
+                android:layout_marginBottom="36dip"
+                android:layout_marginLeft="32dp"
+                android:layout_marginRight="16dp"
+                android:layout_marginTop="18dip"
+                android:layout_weight="1"
+                android:background="@drawable/bg_white_rounded"
+                android:padding="12dp">
+
+                <TextView
+                    android:id="@+id/leaders_points_list_heading"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="4dp"
+                    android:text="Points"
+                    android:textColor="@color/blue500"
+                    android:textSize="24dp" />
+
+                <TextView
+                    android:id="@+id/leaders_points_list_heading_alt"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="4dp"
+                    android:layout_toRightOf="@id/leaders_points_list_heading"
+                    android:text=" Leaders"
+                    android:textColor="@color/blue900"
+                    android:textSize="24dp" />
+
+                <TextView
+                    android:id="@+id/leaders_points_rank"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentRight="true"
+                    android:layout_marginTop="4dp"
+                    android:text="2/421"
+                    android:textColor="@color/blue900"
+                    android:textSize="24dp" />
+
+                <ListView
+                    android:id="@+id/leaders_points_list"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/leaders_points_list_heading"
+                    android:layout_marginTop="12dp"
+                    android:divider="@color/grey50"
+                    android:dividerHeight="1dip"
+                    android:gravity="center" />
+
+                <TextView
+                    android:id="@+id/leaders_points_empty"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerHorizontal="true"
+                    android:layout_marginTop="48dp"
+                    android:text="No data"
+                    android:textColor="@color/grey200"
+                    android:textSize="14dp"
+                    android:visibility="gone" />
+
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_alignParentTop="true"
+                android:layout_marginBottom="36dip"
+                android:layout_marginLeft="16dp"
+                android:layout_marginRight="32dp"
+                android:layout_marginTop="18dip"
+                android:layout_weight="1"
+                android:background="@drawable/bg_white_rounded"
+                android:padding="12dp">
+
+                <TextView
+                    android:id="@+id/leaders_completed_list_heading"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="4dp"
+                    android:text="Completed"
+                    android:textColor="@color/blue500"
+                    android:textSize="24dp" />
+
+                <TextView
+                    android:id="@+id/leaders_completed_list_heading_alt"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="4dp"
+                    android:layout_toRightOf="@id/leaders_completed_list_heading"
+                    android:text=" Leaders"
+                    android:textColor="@color/blue900"
+                    android:textSize="24dp" />
+
+                <TextView
+                    android:id="@+id/leaders_completed_rank"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentRight="true"
+                    android:layout_marginTop="4dp"
+                    android:text="2/421"
+                    android:textColor="@color/blue900"
+                    android:textSize="24dp" />
+
+                <ListView
+                    android:id="@+id/leaders_completed_list"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_below="@id/leaders_completed_list_heading"
+                    android:layout_marginTop="12dp"
+                    android:divider="@color/grey50"
+                    android:dividerHeight="1dip"
+                    android:gravity="center" />
+
+                <TextView
+                    android:id="@+id/leaders_completed_empty"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerHorizontal="true"
+                    android:layout_marginTop="48dp"
+                    android:text="No data"
+                    android:textColor="@color/grey200"
+                    android:textSize="14dp"
+                    android:visibility="gone" />
+            </RelativeLayout>
+        </LinearLayout>
+    </RelativeLayout>
+
+</RelativeLayout>

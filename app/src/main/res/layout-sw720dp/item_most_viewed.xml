@@ -1,0 +1,29 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/item_message_container"
+    android:layout_width="match_parent"
+    android:layout_height="48dp"
+    android:background="@color/white">
+
+    <TextView
+        android:id="@+id/item_mvd_title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerVertical="true"
+        android:layout_marginRight="8dp"
+        android:layout_marginLeft="8dp"
+        android:text="Some Item Name"
+        android:textColor="@color/grey900"
+        android:textSize="16dp" />
+
+    <TextView
+        android:id="@+id/item_mvd_info"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerVertical="true"
+        android:layout_alignParentRight="true"
+        android:layout_marginRight="8dp"
+        android:text="124 min  24 views"
+        android:textColor="@color/grey500"
+        android:textSize="16dp" />
+</RelativeLayout>

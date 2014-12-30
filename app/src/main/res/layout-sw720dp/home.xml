@@ -1,0 +1,220 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/bg_main"
+    tools:context="com.kinetiqa.glacier.ui.Home">
+
+
+    <!-- Top Bar MenuManager -->
+
+    <RelativeLayout
+        android:id="@+id/nav_top_bar"
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        android:layout_alignParentTop="true"
+        android:background="@color/blue900AA">
+
+        <!-- Left Home Icon -->
+        <Button
+            android:id="@+id/nav_back_btn"
+            android:layout_width="wrap_content"
+            android:layout_height="40dip"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="12dp"
+            android:background="@drawable/bg_blue700_rounded_selector"
+            android:drawableLeft="@drawable/ic_action_previous_item"
+            android:drawablePadding="4dp"
+            android:paddingLeft="12dp"
+            android:paddingRight="24dp"
+            android:text="@string/back"
+            android:textColor="@color/white"
+            android:textSize="16dp"
+            android:visibility="gone" />
+
+        <ImageButton
+            android:id="@+id/nav_home_btn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="10dip"
+            android:layout_marginTop="10dip"
+            android:background="@null"
+            android:contentDescription="@string/app_name"
+            android:scaleType="fitXY"
+            android:src="@drawable/glacier_logo" />
+
+
+        <!-- Center Search Box -->
+        <RelativeLayout
+            android:id="@+id/search_container"
+            android:layout_width="320dip"
+            android:layout_height="40dip"
+            android:layout_centerInParent="true"
+            android:background="@drawable/bg_search_field"
+            android:descendantFocusability="beforeDescendants"
+            android:focusableInTouchMode="true">
+
+            <EditText
+                android:id="@+id/search_field"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginBottom="2dp"
+                android:layout_marginLeft="16dp"
+                android:layout_marginRight="8dp"
+                android:layout_marginTop="2dp"
+                android:background="@null"
+                android:hint="@string/search_hint"
+                android:inputType="text"
+                android:textColor="@color/white"
+                android:textColorHint="@color/grey200"
+                android:textSize="18dp"
+                android:windowSoftInputMode="stateHidden" />
+
+        </RelativeLayout>
+
+        <!-- Right Button Group -->
+
+        <RelativeLayout
+            android:id="@+id/right_menu_container"
+            android:layout_width="wrap_content"
+            android:layout_height="40dip"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:layout_marginRight="32dip"
+            android:paddingRight="0dp">
+
+            <ImageButton
+                android:id="@+id/profile_icon"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:background="@null"
+                android:contentDescription="@string/app_name"
+                android:padding="4dp"
+                android:scaleType="fitXY"
+                android:src="@drawable/ic_action_person" />
+
+            <TextView
+                android:id="@+id/profile_name"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:layout_marginRight="16dp"
+                android:layout_toRightOf="@+id/profile_icon"
+                android:text="Abaci"
+                android:textColor="@color/white"
+                android:textSize="16dp" />
+
+            <RelativeLayout
+                android:id="@+id/right_menu_points_container"
+                android:layout_width="wrap_content"
+                android:layout_height="40dp"
+                android:layout_centerVertical="true"
+                android:layout_marginRight="0dp"
+                android:layout_toRightOf="@+id/profile_name"
+                android:background="@drawable/bg_blue700_rounded"
+                android:paddingLeft="4dp">
+
+                <TextView
+                    android:id="@+id/points_available"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:layout_marginLeft="8dp"
+                    android:text="0"
+                    android:textColor="@color/white"
+                    android:textSize="16dp" />
+
+                <TextView
+                    android:id="@+id/points_available_prompt"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:layout_toRightOf="@+id/points_available"
+                    android:paddingLeft="4dp"
+                    android:paddingRight="8dp"
+                    android:text=" points"
+                    android:textColor="@color/blue200"
+                    android:textSize="16dp" />
+            </RelativeLayout>
+
+        </RelativeLayout>
+
+    </RelativeLayout>
+    <View
+        android:id="@+id/nav_top_bar_divider"
+        android:layout_width="match_parent"
+        android:layout_height="3dp"
+        android:background="@color/blue700"
+        android:layout_below="@+id/nav_top_bar"/>
+
+    <!-- Side MenuManager -->
+
+    <RelativeLayout
+        android:id="@+id/nav_side_menu_container"
+        android:layout_width="220dp"
+        android:layout_height="match_parent"
+        android:layout_marginTop="63dp"
+        android:background="@color/blue900AA">
+
+        <ListView
+            android:id="@+id/nav_side_menu"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginBottom="48dp"
+            android:divider="@color/grey700AA"
+            android:dividerHeight="0dp"/>
+
+        <RelativeLayout
+            android:id="@+id/nav_settings_container"
+            android:layout_width="match_parent"
+            android:layout_height="56dp"
+            android:layout_alignParentBottom="true"
+            android:background="@drawable/bg_blue_selector">
+
+            <ImageView
+                android:id="@+id/item_menu_icon"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:layout_centerVertical="true"
+                android:padding="8dp"
+                android:src="@drawable/ic_action_settings" />
+
+            <TextView
+                android:id="@+id/item_menu_text"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:layout_marginBottom="8dp"
+                android:layout_marginRight="16dp"
+                android:layout_marginTop="8dp"
+                android:layout_toRightOf="@+id/item_menu_icon"
+                android:text="Settings"
+                android:textColor="@color/grey50"
+                android:textSize="16dp" />
+        </RelativeLayout>
+    </RelativeLayout>
+
+    <FrameLayout
+        android:id="@+id/main_fragment"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginLeft="220dp"
+        android:layout_marginTop="63dp"
+        android:paddingTop="12dp" />
+
+    <RelativeLayout
+        android:id="@+id/search_list_container"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginTop="63dp"
+        android:background="@color/white"
+        android:visibility="gone">
+
+        <ListView
+            android:id="@+id/search_list"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+    </RelativeLayout>
+</RelativeLayout>

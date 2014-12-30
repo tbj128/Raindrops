@@ -1,0 +1,118 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/semitransparent" >
+
+    <RelativeLayout
+        android:id="@+id/doc_nav_container"
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        android:layout_alignParentTop="true"
+        android:background="@color/blue900">
+
+        <Button
+            android:id="@+id/doc_back_btn"
+            android:layout_width="wrap_content"
+            android:layout_height="40dip"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="12dp"
+            android:background="@drawable/bg_blue700_rounded_selector"
+            android:drawableLeft="@drawable/ic_action_previous_item"
+            android:drawablePadding="4dp"
+            android:paddingLeft="12dp"
+            android:paddingRight="24dp"
+            android:text="Home"
+            android:textColor="@color/white"
+            android:textSize="16dp" />
+
+        <!--<ImageButton
+            android:id="@+id/nav_next_btn"
+            android:layout_width="60dip"
+            android:layout_height="60dip"
+            android:layout_alignParentRight="true"
+            android:layout_marginLeft="10dip"
+            android:layout_marginTop="10dip"
+            android:layout_marginRight="16dp"
+            android:background="@null"
+            android:contentDescription="@string/app_name"
+            android:scaleType="fitXY"
+            android:src="@drawable/ic_launcher" />
+
+        <ImageButton
+            android:id="@+id/nav_prev_btn"
+            android:layout_width="60dip"
+            android:layout_height="60dip"
+            android:layout_toLeftOf="@+id/nav_next_btn"
+            android:layout_marginLeft="10dip"
+            android:layout_marginTop="10dip"
+            android:background="@null"
+            android:contentDescription="@string/app_name"
+            android:scaleType="fitXY"
+            android:src="@drawable/ic_launcher" />-->
+
+        <ImageButton
+            android:id="@+id/doc_favourite"
+            android:layout_width="48dip"
+            android:layout_height="48dip"
+            android:layout_toLeftOf="@+id/doc_practice"
+            android:layout_centerVertical="true"
+            android:layout_marginRight="12dip"
+            android:background="@drawable/bg_blue_rounded_selector"
+            android:contentDescription="@string/app_name"
+            android:src="@drawable/ic_action_not_important" />
+
+
+        <ImageButton
+            android:id="@+id/doc_practice"
+            android:layout_width="48dip"
+            android:layout_height="48dip"
+            android:layout_toLeftOf="@+id/doc_info"
+            android:layout_centerVertical="true"
+            android:layout_marginRight="4dip"
+            android:background="@drawable/bg_blue_rounded_selector"
+            android:contentDescription="@string/app_name"
+            android:src="@drawable/ic_action_time"
+            android:visibility="gone"/>
+
+        <ImageButton
+            android:id="@+id/doc_info"
+            android:layout_width="48dip"
+            android:layout_height="48dip"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:layout_marginRight="12dip"
+            android:layout_marginTop="10dip"
+            android:background="@drawable/bg_blue_rounded_selector"
+            android:contentDescription="@string/app_name"
+            android:src="@drawable/ic_action_about" />
+
+        <TextView
+            android:id="@+id/doc_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:layout_marginLeft="8dp"
+            android:text="Some Video Title"
+            android:textColor="@color/white"
+            android:textSize="18dp" />
+
+    </RelativeLayout>
+
+
+    <RelativeLayout
+        android:id="@+id/doc_container"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_alignParentTop="true"
+        android:layout_marginTop="60dip">
+
+        <WebView
+            android:id="@+id/doc_viewer"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_centerHorizontal="true" />
+
+    </RelativeLayout>
+
+</RelativeLayout>

@@ -1,0 +1,115 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="480dp"
+    android:layout_height="220dp"
+    android:background="@drawable/bg_white_rounded"
+    android:orientation="vertical"
+    android:minWidth="220dp"
+    android:layout_gravity="center"
+    android:layout_marginLeft="120dp"
+    android:layout_marginRight="120dp">
+
+    <RelativeLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:padding="24dp">
+
+        <!-- Top Bar -->
+        <RelativeLayout
+            android:id="@+id/dialog_header"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content">
+
+            <TextView
+                android:id="@+id/dialog_title"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:paddingBottom="16dp"
+                android:text="Audio Attachment"
+                android:textColor="#CC000000"
+                android:textSize="20sp"
+                android:textStyle="bold" />
+
+            <ImageButton
+                android:id="@+id/dialog_close"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@drawable/bg_white_rounded_selector"
+                android:layout_alignParentRight="true"
+                android:src="@drawable/ic_action_remove_dark"/>
+
+        </RelativeLayout>
+
+
+        <RelativeLayout
+            android:id="@+id/mp_media_container"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_below="@+id/dialog_header"
+            android:layout_centerHorizontal="true">
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_alignParentTop="true"
+                android:layout_marginBottom="4dp"
+                android:layout_marginTop="32dp">
+
+                <SeekBar
+                    android:id="@+id/mp_seek"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content" />
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/mp_seek"
+                    android:layout_marginTop="24dp">
+
+                    <RelativeLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content">
+
+                        <Button
+                            android:id="@+id/mp_audio_pause"
+                            android:layout_width="wrap_content"
+                            android:layout_height="40dp"
+                            android:background="@drawable/nav_green_button_selector"
+                            android:drawableLeft="@drawable/ic_action_pause_over_video"
+                            android:drawablePadding="15sp"
+                            android:gravity="left|center_vertical"
+                            android:paddingLeft="12dp"
+                            android:paddingRight="24dp"
+                            android:text="Pause"
+                            android:textColor="@color/grey50"
+                            android:textSize="16dp"
+                            android:visibility="gone" />
+
+                        <Button
+                            android:id="@+id/mp_audio_play"
+                            android:layout_width="wrap_content"
+                            android:layout_height="40dp"
+                            android:background="@drawable/nav_green_button_selector"
+                            android:drawableLeft="@drawable/ic_action_play_over_video"
+                            android:drawablePadding="15sp"
+                            android:gravity="left|center_vertical"
+                            android:paddingLeft="12dp"
+                            android:paddingRight="24dp"
+                            android:text="Play"
+                            android:textColor="@color/grey50"
+                            android:textSize="16dp" />
+                    </RelativeLayout>
+
+                    <TextView
+                        android:id="@+id/mp_audio_time"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentRight="true"
+                        android:layout_marginTop="12dp"
+                        android:text="1:23 / 23:23"
+                        android:textColor="@color/grey500" />
+                </RelativeLayout>
+            </RelativeLayout>
+        </RelativeLayout>
+</RelativeLayout>
+    </LinearLayout>

@@ -1,0 +1,179 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@null">
+
+    <!-- Main Menu Area -->
+
+    <!-- Menu Layout -->
+    <RelativeLayout
+        android:id="@+id/main_area"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:paddingLeft="24dp"
+        android:paddingRight="24dp"
+        android:paddingTop="24dp">
+
+
+        <RelativeLayout
+            android:id="@+id/main_meta_area"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/bg_whitecc_rounded"
+            android:padding="24dp">
+
+            <RelativeLayout
+                android:id="@+id/main_meta_area_left"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <LinearLayout
+                    android:id="@+id/breadcrumb_container"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="8dp"
+                    android:layout_marginRight="400dp"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="home"
+                        android:textColor="@color/blue700"
+                        android:textSize="16dp" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text=" / "
+                        android:textColor="@color/blue700"
+                        android:textSize="16dp" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="wheeling"
+                        android:textColor="@color/blue900"
+                        android:textSize="16dp" />
+                </LinearLayout>
+
+                <TextView
+                    android:id="@+id/main_title"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/breadcrumb_container"
+                    android:layout_marginBottom="8dp"
+                    android:text="Wheeling"
+                    android:textColor="@color/blue900"
+                    android:textSize="56dp" />
+
+
+                <TextView
+                    android:id="@+id/main_desc"
+                    android:layout_width="640dp"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/main_title"
+                    android:lineSpacingExtra="2dp"
+                    android:text="@string/lorem"
+                    android:textColor="@color/grey500"
+                    android:textSize="16dp"
+                    android:visibility="gone" />
+            </RelativeLayout>
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:id="@+id/main_meta_area_right"
+            android:layout_width="400dp"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_marginRight="12dp"
+            android:layout_marginTop="24dp">
+
+            <RelativeLayout
+                android:id="@+id/stats_practiced_box"
+                android:layout_width="112dp"
+                android:layout_height="112dp"
+                android:layout_alignParentRight="true"
+                android:layout_marginLeft="16dp"
+                android:background="@drawable/bg_stats_box">
+
+                <TextView
+                    android:id="@+id/stats_practiced"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerHorizontal="true"
+                    android:layout_marginTop="16dp"
+                    android:text="0"
+                    android:textColor="@color/white"
+                    android:textSize="48dp" />
+
+                <TextView
+                    android:id="@+id/stats_practiced_desc"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentBottom="true"
+                    android:layout_centerHorizontal="true"
+                    android:layout_marginBottom="8dp"
+                    android:text="minutes"
+                    android:textColor="@color/white"
+                    android:textSize="16dp" />
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:id="@+id/stats_completed_box"
+                android:layout_width="112dp"
+                android:layout_height="112dp"
+                android:layout_marginLeft="16dp"
+                android:layout_toLeftOf="@id/stats_practiced_box"
+                android:background="@drawable/bg_stats_box">
+
+                <TextView
+                    android:id="@+id/stats_completed"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerHorizontal="true"
+                    android:layout_marginTop="16dp"
+                    android:text="4/4"
+                    android:textColor="@color/white"
+                    android:textSize="48dp" />
+
+                <TextView
+                    android:id="@+id/stats_completed_desc"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentBottom="true"
+                    android:layout_centerHorizontal="true"
+                    android:layout_marginBottom="8dp"
+                    android:text="viewed"
+                    android:textColor="@color/white"
+                    android:textSize="16dp" />
+            </RelativeLayout>
+
+        </RelativeLayout>
+
+        <ListView
+            android:id="@+id/main_list_menu"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/main_meta_area"
+            android:layout_marginTop="12dp"
+            android:background="@drawable/bg_white_rounded"
+            android:divider="@color/grey50"
+            android:dividerHeight="1px"
+            android:paddingBottom="3dp"
+            android:paddingTop="3dp" />
+
+        <TextView
+            android:id="@+id/main_empty"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:text="No items yet"
+            android:textColor="@color/white"
+            android:textSize="14dp"
+            android:visibility="gone" />
+    </RelativeLayout>
+
+
+</RelativeLayout>
