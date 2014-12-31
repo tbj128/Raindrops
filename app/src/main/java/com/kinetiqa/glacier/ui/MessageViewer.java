@@ -183,12 +183,16 @@ public class MessageViewer extends Activity {
 
     private void initAudioPlayer() {
         playbackTimerTextView = (TextView) findViewById(R.id.mv_audio_time);
+        playbackTimerTextView.setVisibility(View.VISIBLE);
 
         playbackSeekBar = (SeekBar) findViewById(R.id.mv_seek);
+        playbackSeekBar.setVisibility(View.VISIBLE);
         playbackSeekBar.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
             @Override
-            public void onProgressChanged(SeekBar seekBar, int progress, boolean b) {
-                audioPlayer.seekTo(progress);
+            public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
+                if (audioPlayer != null && fromUser) {
+                    audioPlayer.seekTo(progress);
+                }
             }
 
             @Override
@@ -203,6 +207,7 @@ public class MessageViewer extends Activity {
         });
 
         playButton = (Button) findViewById(R.id.mv_audio_play);
+        playButton.setVisibility(View.VISIBLE);
         playButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -217,15 +222,17 @@ public class MessageViewer extends Activity {
         });
 
         pauseButton = (Button) findViewById(R.id.mv_audio_pause);
+        pauseButton.setVisibility(View.GONE);
         pauseButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 playButton.setVisibility(View.VISIBLE);
                 pauseButton.setVisibility(View.GONE);
-
                 audioPlayer.pause();
             }
         });
+
+        initAudioPlayback();
     }
 
     private void initAudioPlayback() {
@@ -264,7 +271,7 @@ public class MessageViewer extends Activity {
         @Override
         public void run() {
             playbackSeekBar.setProgress(audioPlayer.getCurrentPosition());
-            playbackTimerTextView.setText(TimeConversion.convertMillisecondsToTime(audioPlayer.getCurrentPosition()));
+            playbackTimerTextView.setText(TimeConversion.convertMillisecondsToTime(audioPlayer.getCurrentPosition()) + "/" + TimeConversion.convertMillisecondsToTime(audioPlayer.getDuration()));
             seekHandler.postDelayed(seekBarRunnable, 100);
         }
     };

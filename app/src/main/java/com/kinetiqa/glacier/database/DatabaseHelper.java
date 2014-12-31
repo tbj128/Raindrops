@@ -483,6 +483,8 @@ public class DatabaseHelper extends SQLiteOpenHelper {
                             ((MenuItem) menu).setNumViews(numViews);
                         }
                         menuItems.add((MenuItem) menu);
+
+                        c.moveToNext();
                     }
                 }
             }

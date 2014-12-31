@@ -197,13 +197,7 @@ public class FragmentStats extends Fragment {
             title.setText(menuItem.getTitle());
 
             TextView info = (TextView) view.findViewById(R.id.item_mvd_info);
-            long numSecondsViewed = TimeConversion.millsecondsToSeconds(menuItem.getTotalTimeViewed());
-            if (numSecondsViewed > 60) {
-                long numMinutesViewed = TimeConversion.millsecondsToMinutes(menuItem.getTotalTimeViewed());
-                info.setText(numMinutesViewed + " min    " + menuItem.getNumViews() + " views");
-            } else {
-                info.setText(numSecondsViewed + " sec    " + menuItem.getNumViews() + " views");
-            }
+            info.setText(menuItem.getNumViews() + " views");
 
             return view;
         }

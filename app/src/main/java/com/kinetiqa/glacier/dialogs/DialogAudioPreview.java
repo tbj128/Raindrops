@@ -62,8 +62,10 @@ public class DialogAudioPreview extends Dialog {
         playbackSeekBar = (SeekBar) findViewById(R.id.mp_seek);
         playbackSeekBar.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
             @Override
-            public void onProgressChanged(SeekBar seekBar, int progress, boolean b) {
-                audioPlayer.seekTo(progress);
+            public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
+                if (audioPlayer != null && fromUser) {
+                    audioPlayer.seekTo(progress);
+                }
             }
 
             @Override
