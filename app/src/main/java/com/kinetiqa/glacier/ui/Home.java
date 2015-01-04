@@ -374,7 +374,7 @@ public class Home extends FragmentActivity {
                 0, alarmReceiver, PendingIntent.FLAG_CANCEL_CURRENT);
 
         AlarmManager alarms = (AlarmManager) getSystemService(Context.ALARM_SERVICE);
-        alarms.setInexactRepeating(AlarmManager.RTC_WAKEUP, System.currentTimeMillis(), 1000 * 60 * 10, syncIntent);
+        alarms.setInexactRepeating(AlarmManager.RTC_WAKEUP, System.currentTimeMillis(), 1000 * 60 * 20, syncIntent);
     }
 
     // ------------------------------------------------------------------------

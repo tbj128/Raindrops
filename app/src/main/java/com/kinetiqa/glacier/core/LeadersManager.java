@@ -56,7 +56,7 @@ public class LeadersManager {
         String username = sharedPreferences.getString("username", "");
         for (int i = 0; i < pointsLeaders.size(); i++) {
             if (username.equals(pointsLeaders.get(i).getUsername())) {
-                rank = i;
+                rank = i + 1;
             }
         }
         if (rank != -1) {
@@ -71,7 +71,7 @@ public class LeadersManager {
         String username = sharedPreferences.getString("username", "");
         for (int i = 0; i < completedLeaders.size(); i++) {
             if (username.equals(completedLeaders.get(i).getUsername())) {
-                rank = i;
+                rank = i + 1;
             }
         }
         if (rank != -1) {
